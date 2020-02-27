@@ -1,6 +1,9 @@
 -- Indexes for primary keys have been explicitly created.
 
 DROP TABLE User;
+DROP TABLE Cinema;
+DROP TABLE City;
+DROP TABLE Movie;
 
 CREATE TABLE User (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -15,3 +18,36 @@ CREATE TABLE User (
 ) ENGINE = InnoDB;
 
 CREATE INDEX UserIndexByUserName ON User (userName);
+
+CREATE TABLE City (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL, 
+	CONSTRAINT CityPK PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE INDEX CityIndexByName ON City (name);
+
+CREATE TABLE Cinema (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL, 
+	cityId BIGINT NOT NULL, 
+	CONSTRAINT CinenamPK PRIMARY KEY (id),
+	CONSTRAINT CinemaCityFK FOREIGN KEY (cityId) 
+        REFERENCES City (id)
+) ENGINE = InnoDB;
+
+CREATE INDEX CinemaIndexByName ON Cinema (name);
+
+
+
+
+
+CREATE TABLE Movie (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(60) NOT NULL,
+    synopsis VARCHAR(2000) NOT NULL, 
+    duration SMALLINT NOT NULL, 
+    CONSTRAINT MoviePK PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE INDEX MovieIndexByTitle ON Movie (title);
