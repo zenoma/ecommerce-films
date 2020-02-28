@@ -1,6 +1,9 @@
 -- Indexes for primary keys have been explicitly created.
 
+DROP TABLE Book;
 DROP TABLE User;
+DROP TABLE SessionMovie;
+DROP TABLE Room;
 DROP TABLE Cinema;
 DROP TABLE City;
 DROP TABLE Movie;
@@ -17,7 +20,7 @@ CREATE TABLE User (
     CONSTRAINT UserNameUniqueKey UNIQUE (userName)
 ) ENGINE = InnoDB;
 
-CREATE INDEX UserIndexByUserName ON User (userName);
+CREATE INDEX UserIndexByUserName ON User(userName);
 
 CREATE TABLE City (
 	id BIGINT NOT NULL AUTO_INCREMENT,
@@ -25,22 +28,30 @@ CREATE TABLE City (
 	CONSTRAINT CityPK PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
-CREATE INDEX CityIndexByName ON City (name);
+CREATE INDEX CityIndexByName ON City(name);
 
 CREATE TABLE Cinema (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(60) NOT NULL, 
 	cityId BIGINT NOT NULL, 
-	CONSTRAINT CinenamPK PRIMARY KEY (id),
+	CONSTRAINT CinemaPK PRIMARY KEY (id),
 	CONSTRAINT CinemaCityFK FOREIGN KEY (cityId) 
         REFERENCES City (id)
 ) ENGINE = InnoDB;
 
-CREATE INDEX CinemaIndexByName ON Cinema (name);
+CREATE INDEX CinemaIndexByName ON Cinema(name);
 
+CREATE TABLE Room (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL, 
+    capacity INT NOT NULL,
+    cinemaId BIGINT NOT NULL,
+	CONSTRAINT RoomPK PRIMARY KEY (id),
+	CONSTRAINT RoomCinemaFK FOREIGN KEY (cinemaId) 
+        REFERENCES Cinema (id)
+) ENGINE = InnoDB;
 
-
-
+CREATE INDEX RoomIndexByName ON Room(name);
 
 CREATE TABLE Movie (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -51,3 +62,30 @@ CREATE TABLE Movie (
 ) ENGINE = InnoDB;
 
 CREATE INDEX MovieIndexByTitle ON Movie (title);
+
+CREATE TABLE SessionMovie(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    movieId BIGINT NOT NULL,
+    roomId BIGINT NOT NULL,
+    price DECIMAL(11, 2) NOT NULL,
+    date DATETIME NOT NULL,
+	CONSTRAINT SessionPK PRIMARY KEY (id),
+	CONSTRAINT SessionMovieFK FOREIGN KEY (movieId) 
+        REFERENCES Movie (id),
+	CONSTRAINT SessionRoomFK FOREIGN KEY (roomId) 
+        REFERENCES Room (id)
+);
+
+CREATE TABLE Book(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    tickets INT NOT NULL,
+    sessionMovieId BIGINT NOT NULL,
+    credit_card VARCHAR(16) NOT NULL,
+    userId BIGINT NOT NULL,
+    date DATETIME NOT NULL,
+	CONSTRAINT BookPK PRIMARY KEY (id),
+	CONSTRAINT BookSessionMovieFK FOREIGN KEY (sessionMovieId) 
+        REFERENCES SessionMovie (id),
+	CONSTRAINT BookUserFK FOREIGN KEY (userId) 
+        REFERENCES User (id)
+);
