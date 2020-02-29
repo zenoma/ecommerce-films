@@ -14,7 +14,7 @@ import es.udc.paproject.backend.model.services.BookingService;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-public class BokingServiceTest {
+public class BookingServiceTest {
 
 	// TODO Probar el Caso de Uso findMovie
 	@Autowired
@@ -30,7 +30,17 @@ public class BokingServiceTest {
 	@Test
 	public void testFindMovie() {
 		Movie movie = addMovie();
-		assertEquals(movie.getTitle(), bookingService.findMovie(movie.getId()).get().getTitle());
+		Movie movieFound=bookingService.findMovie(movie.getId()).get();
+		assertEquals(movie, movieFound);
 	}
-
+	
+	@Test
+	public void testNotFoundMovie() {
+		try {
+			bookingService.findMovie(99999L).get();
+			assertTrue(false);
+		}catch(Exception e) { //TODO AÑADIR EXCEPCIÓN CORRESPONDIENTE DE SQL
+			assertTrue(true);
+		}
+	}
 }
