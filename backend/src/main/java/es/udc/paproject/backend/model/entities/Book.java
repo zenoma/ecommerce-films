@@ -14,17 +14,17 @@ import javax.persistence.ManyToOne;
 public class Book {
 	private Long id;
 	private int tickets;
-	private SessionMovie sessionMovie;
-	private String credit_card;
+	private MovieSession movieSession;
+	private Long credit_card;
 	private User user;
 	private Date date;
 	private boolean withdraw;
 	
 	public Book() {}
 	
-	public Book(int tickets, SessionMovie sessionMovie, String credit_card, User user, Date date, boolean withdraw) {
+	public Book(int tickets, MovieSession movieSession, Long credit_card, User user, Date date, boolean withdraw) {
 		this.tickets=tickets;
-		this.sessionMovie=sessionMovie;
+		this.movieSession=movieSession;
 		this.credit_card=credit_card;
 		this.user=user;
 		this.date=date;
@@ -51,19 +51,19 @@ public class Book {
 
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
 	@JoinColumn(name="sessionMovieId")
-	public SessionMovie getSessionMovie() {
-		return sessionMovie;
+	public MovieSession getMovieSession() {
+		return movieSession;
 	}
 
-	public void setSessionMovie(SessionMovie sessionMovie) {
-		this.sessionMovie = sessionMovie;
+	public void setMovieSession(MovieSession movieSession) {
+		this.movieSession = movieSession;
 	}
 
-	public String getCredit_card() {
+	public Long getCredit_card() {
 		return credit_card;
 	}
 
-	public void setCredit_card(String credit_card) {
+	public void setCredit_card(Long credit_card) {
 		this.credit_card = credit_card;
 	}
 	
@@ -100,7 +100,7 @@ public class Book {
 		result = prime * result + ((credit_card == null) ? 0 : credit_card.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((sessionMovie == null) ? 0 : sessionMovie.hashCode());
+		result = prime * result + ((movieSession == null) ? 0 : movieSession.hashCode());
 		result = prime * result + tickets;
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + (withdraw ? 1231 : 1237);
@@ -131,10 +131,10 @@ public class Book {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (sessionMovie == null) {
-			if (other.sessionMovie != null)
+		if (movieSession == null) {
+			if (other.movieSession != null)
 				return false;
-		} else if (!sessionMovie.equals(other.sessionMovie))
+		} else if (!movieSession.equals(other.movieSession))
 			return false;
 		if (tickets != other.tickets)
 			return false;

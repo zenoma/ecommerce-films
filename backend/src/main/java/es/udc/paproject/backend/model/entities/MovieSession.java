@@ -1,6 +1,8 @@
 package es.udc.paproject.backend.model.entities;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,18 +11,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class SessionMovie {
+public class MovieSession {
 	private Long id;
 	private Movie movie;
 	private Room room;
 	private double price;
+	private int seats;
 	private Date date;
+	private Set<Book> books=new HashSet<>();
 	
-	public SessionMovie() {}
+	public MovieSession() {}
 	
-	public SessionMovie(Movie movie, Room room, double price, Date date) {
+	public MovieSession(Movie movie, Room room, double price, Date date) {
 		this.movie=movie;
 		this.room=room;
 		this.price=price;
@@ -65,12 +70,29 @@ public class SessionMovie {
 		this.price = price;
 	}
 
+	public int getSeats() {
+		return seats;
+	}
+
+	public void setSeats(int seats) {
+		this.seats = seats;
+	}
+
 	public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@OneToMany(mappedBy="book")
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 
 	@Override
@@ -84,6 +106,7 @@ public class SessionMovie {
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + seats;
 		return result;
 	}
 
@@ -95,7 +118,7 @@ public class SessionMovie {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SessionMovie other = (SessionMovie) obj;
+		MovieSession other = (MovieSession) obj;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -117,6 +140,8 @@ public class SessionMovie {
 			if (other.room != null)
 				return false;
 		} else if (!room.equals(other.room))
+			return false;
+		if (seats != other.seats)
 			return false;
 		return true;
 	}

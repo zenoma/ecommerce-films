@@ -1,5 +1,8 @@
 package es.udc.paproject.backend.model.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,12 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cinema {
 	private Long id;
 	private String name;
 	private City city;
+	private Set<Room> rooms=new HashSet<>();
 	
 	public Cinema() {}
 	
@@ -47,6 +52,15 @@ public class Cinema {
 
 	public void setCity(City city) {
 		this.city = city;
+	}
+	
+	@OneToMany(mappedBy="room")
+	public Set<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(Set<Room> rooms) {
+		this.rooms = rooms;
 	}
 
 	@Override

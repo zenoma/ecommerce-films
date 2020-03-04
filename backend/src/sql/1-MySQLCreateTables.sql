@@ -68,6 +68,7 @@ CREATE TABLE SessionMovie(
     movieId BIGINT NOT NULL,
     roomId BIGINT NOT NULL,
     price DECIMAL(11, 2) NOT NULL,
+	seats SMALLINT NOT NULL,
     date DATETIME NOT NULL,
 	CONSTRAINT SessionPK PRIMARY KEY (id),
 	CONSTRAINT SessionMovieFK FOREIGN KEY (movieId) 
@@ -79,13 +80,13 @@ CREATE TABLE SessionMovie(
 CREATE TABLE Book(
     id BIGINT NOT NULL AUTO_INCREMENT,
     tickets INT NOT NULL,
-    sessionMovieId BIGINT NOT NULL,
-    credit_card VARCHAR(16) NOT NULL,
+    movieSessionId BIGINT NOT NULL,
+    credit_card BIGINT NOT NULL,
     userId BIGINT NOT NULL,
     date DATETIME NOT NULL,
 	CONSTRAINT BookPK PRIMARY KEY (id),
-	CONSTRAINT BookSessionMovieFK FOREIGN KEY (sessionMovieId) 
-        REFERENCES SessionMovie (id),
+	CONSTRAINT BookMovieSessionFK FOREIGN KEY (movieSessionId) 
+        REFERENCES MovieSession (id),
 	CONSTRAINT BookUserFK FOREIGN KEY (userId) 
         REFERENCES User (id)
 );

@@ -1,9 +1,13 @@
 package es.udc.paproject.backend.model.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Movie {
@@ -12,6 +16,7 @@ public class Movie {
 	private String title;
 	private String synopsis;
 	private int duration;
+	private Set<MovieSession> movieSessions=new HashSet<>();
 
 	public Movie() {
 	}
@@ -54,6 +59,15 @@ public class Movie {
 
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
+	}
+
+	@OneToMany(mappedBy="movieSession")
+	public Set<MovieSession> getMovieSessions() {
+		return movieSessions;
+	}
+
+	public void setMovieSessions(Set<MovieSession> movieSessions) {
+		this.movieSessions = movieSessions;
 	}
 
 	@Override

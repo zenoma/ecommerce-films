@@ -1,14 +1,19 @@
 package es.udc.paproject.backend.model.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class City {
 	private Long id;
 	private String name;
+	private Set<Cinema> cinemas = new HashSet<>();
 	
 	public City() {}
 	
@@ -32,6 +37,15 @@ public class City {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@OneToMany(mappedBy="cinema")
+	public Set<Cinema> getCinemas() {
+		return cinemas;
+	}
+
+	public void setCinemas(Set<Cinema> cinemas) {
+		this.cinemas = cinemas;
 	}
 
 	@Override
