@@ -92,7 +92,7 @@ public class User {
 		this.role = role;
 	}
 	
-	@OneToMany(mappedBy="book")
+	@OneToMany(mappedBy="user")
 	public Set<Book> getBooks() {
 		return books;
 	}

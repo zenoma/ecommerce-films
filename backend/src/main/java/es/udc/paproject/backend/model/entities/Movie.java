@@ -61,7 +61,7 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
-	@OneToMany(mappedBy="movieSession")
+	@OneToMany(mappedBy="movie")
 	public Set<MovieSession> getMovieSessions() {
 		return movieSessions;
 	}

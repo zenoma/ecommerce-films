@@ -1,6 +1,6 @@
 package es.udc.paproject.backend.model.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,12 +17,12 @@ public class Book {
 	private MovieSession movieSession;
 	private Long credit_card;
 	private User user;
-	private Date date;
+	private LocalDateTime date;
 	private boolean withdraw;
 	
 	public Book() {}
 	
-	public Book(int tickets, MovieSession movieSession, Long credit_card, User user, Date date, boolean withdraw) {
+	public Book(int tickets, MovieSession movieSession, Long credit_card, User user, LocalDateTime date, boolean withdraw) {
 		this.tickets=tickets;
 		this.movieSession=movieSession;
 		this.credit_card=credit_card;
@@ -77,11 +77,11 @@ public class Book {
 		this.user = user;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 

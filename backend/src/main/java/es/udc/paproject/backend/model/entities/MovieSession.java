@@ -1,6 +1,6 @@
 package es.udc.paproject.backend.model.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,12 +20,12 @@ public class MovieSession {
 	private Room room;
 	private double price;
 	private int seats;
-	private Date date;
+	private LocalDateTime date;
 	private Set<Book> books=new HashSet<>();
 	
 	public MovieSession() {}
 	
-	public MovieSession(Movie movie, Room room, double price, Date date) {
+	public MovieSession(Movie movie, Room room, double price, LocalDateTime date) {
 		this.movie=movie;
 		this.room=room;
 		this.price=price;
@@ -78,15 +78,15 @@ public class MovieSession {
 		this.seats = seats;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	
-	@OneToMany(mappedBy="book")
+	@OneToMany(mappedBy="movieSession")
 	public Set<Book> getBooks() {
 		return books;
 	}

@@ -39,7 +39,7 @@ public class City {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy="cinema")
+	@OneToMany(mappedBy="city")
 	public Set<Cinema> getCinemas() {
 		return cinemas;
 	}

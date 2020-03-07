@@ -2,7 +2,7 @@
 
 DROP TABLE Book;
 DROP TABLE User;
-DROP TABLE SessionMovie;
+DROP TABLE MovieSession;
 DROP TABLE Room;
 DROP TABLE Cinema;
 DROP TABLE City;
@@ -63,7 +63,7 @@ CREATE TABLE Movie (
 
 CREATE INDEX MovieIndexByTitle ON Movie (title);
 
-CREATE TABLE SessionMovie(
+CREATE TABLE MovieSession(
     id BIGINT NOT NULL AUTO_INCREMENT,
     movieId BIGINT NOT NULL,
     roomId BIGINT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE SessionMovie(
 	seats SMALLINT NOT NULL,
     date DATETIME NOT NULL,
 	CONSTRAINT SessionPK PRIMARY KEY (id),
-	CONSTRAINT SessionMovieFK FOREIGN KEY (movieId) 
+	CONSTRAINT MovieSessionFK FOREIGN KEY (movieId) 
         REFERENCES Movie (id),
 	CONSTRAINT SessionRoomFK FOREIGN KEY (roomId) 
         REFERENCES Room (id)
