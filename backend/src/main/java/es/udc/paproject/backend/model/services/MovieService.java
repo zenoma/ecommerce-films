@@ -1,13 +1,14 @@
 package es.udc.paproject.backend.model.services;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
-import es.udc.paproject.backend.model.entities.MovieSession;
+import es.udc.paproject.backend.model.entities.Movie;
+import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 
 public interface MovieService {
 
 
-	Set<MovieSession> getListing(String cityName, String cinemaName, Date date);
+	Set<Movie> getListing(Long cinemaId, LocalDateTime date) throws InstanceNotFoundException;
 	
 }
