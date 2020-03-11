@@ -5,6 +5,7 @@ import java.util.Set;
 
 import es.udc.paproject.backend.model.entities.Book;
 import es.udc.paproject.backend.model.entities.Movie;
+import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughSeatsException;
@@ -17,7 +18,7 @@ public interface BookingService {
     Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
 	    throws InstanceNotFoundException, UnauthorizedRoleException, NotEnoughSeatsException;
 
-    void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException;
+    void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException;
 
     Set<Book> getBookRecord(Long userId) throws UnauthorizedRoleException, InstanceNotFoundException;
 

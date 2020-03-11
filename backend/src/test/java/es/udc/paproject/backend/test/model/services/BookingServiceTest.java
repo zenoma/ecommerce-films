@@ -7,8 +7,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import es.udc.paproject.backend.model.entities.Movie;
 import es.udc.paproject.backend.model.entities.MovieDao;
+import es.udc.paproject.backend.model.entities.MovieSession;
+import es.udc.paproject.backend.model.entities.MovieSessionDao;
+import es.udc.paproject.backend.model.entities.Room;
 import es.udc.paproject.backend.model.services.BookingService;
 
 @SpringBootTest
@@ -19,6 +24,9 @@ public class BookingServiceTest {
 	// TODO Probar el Caso de Uso findMovie
 	@Autowired
 	private MovieDao movieDao;
+	@Autowired
+	private MovieSessionDao sessionDao;
+	
 
 	@Autowired
 	private BookingService bookingService;
@@ -26,6 +34,10 @@ public class BookingServiceTest {
 	private Movie addMovie() {
 		return movieDao.save(new Movie("Batman Begins", "This is a synopsis", 180));
 	}
+	
+	//private MovieSession addSession(Movie movie) {
+		//return sessionDao.save(new MovieSession(movie, room, 5.0, LocalDateTime.now()));
+	//}
 	
 	@Test
 	public void testFindMovie() {
@@ -42,5 +54,10 @@ public class BookingServiceTest {
 		}catch(Exception e) { //TODO AÑADIR EXCEPCIÓN CORRESPONDIENTE DE SQL
 			assertTrue(true);
 		}
+	}
+	
+	@Test
+	public void testBookTicket() {
+		
 	}
 }

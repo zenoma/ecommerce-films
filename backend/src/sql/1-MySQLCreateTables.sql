@@ -84,7 +84,6 @@ CREATE TABLE Book(
     credit_card BIGINT NOT NULL,
     userId BIGINT NOT NULL,
     date DATETIME NOT NULL,
-    code BIGINT NOT NULL,
     withdraw BOOLEAN NOT NULL,
 	CONSTRAINT BookPK PRIMARY KEY (id),
 	CONSTRAINT BookMovieSessionFK FOREIGN KEY (movieSessionId) 

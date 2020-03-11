@@ -15,6 +15,7 @@ import es.udc.paproject.backend.model.entities.MovieDao;
 import es.udc.paproject.backend.model.entities.MovieSession;
 import es.udc.paproject.backend.model.entities.MovieSessionDao;
 import es.udc.paproject.backend.model.entities.User;
+import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughSeatsException;
@@ -46,9 +47,7 @@ public class BookingServiceImpl implements BookingService {
     public Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
 	    throws InstanceNotFoundException, UnauthorizedRoleException, NotEnoughSeatsException {
 	User user = permissionChecker.checkUser(userId);
-	if (user.getRole() != User.RoleType.USER) {
-	    throw new UnauthorizedRoleException();
-	}
+	
 	MovieSession session = checkSession(sessionId);
 	if (session.getSeats() < seats) {
 	    throw new NotEnoughSeatsException(sessionId, session.getSeats());
@@ -59,60 +58,47 @@ public class BookingServiceImpl implements BookingService {
 
 	sessionDao.save(session);
 
-	Long code = ticketGenerator(sessionId, userId);
-	Book book = new Book(seats, session, creditCard, user, LocalDateTime.now(), false, code);
+	Book book = new Book(seats, session, creditCard, user, LocalDateTime.now(), false);
 
 	bookDao.save(book);
 
-	return code;
+	return book.getId();
     }
 
     @Override
-    public void deliverTicket(Long creditCard, Long code)
-	    throws InstanceNotFoundException, CodeAndCreditCardNotMatchException {
-	Book book = checkBookByCode(code);
-	if (book.getCredit_card() != creditCard) {
-	    throw new CodeAndCreditCardNotMatchException(code, creditCard);
-	}
-	book.setWithdraw(true);
-	bookDao.save(book);
+    public void deliverTicket(Long creditCard, Long bookId)
+	    throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException {
+    	Book book = checkBookByCode(bookId);
+		if (book.getCredit_card() != creditCard) {
+			throw new CodeAndCreditCardNotMatchException(bookId, creditCard);
+		}
+		if (book.isWithdraw()) {
+			throw new BookAlreadyTakenException(bookId);
+		}
+		book.setWithdraw(true);
+		bookDao.save(book);
     }
 
     @Override
     public Set<Book> getBookRecord(Long userId) throws UnauthorizedRoleException, InstanceNotFoundException {
-	User user = permissionChecker.checkUser(userId);
-	if (user.getRole() != User.RoleType.USER) {
-	    throw new UnauthorizedRoleException();
-	}
-	return bookDao.findAllByUserId(userId);
-    }
-
-    public Long ticketGenerator(Long sessionId, Long userId) {
-	return ((sessionId * 100) + userId);
+    	User user = permissionChecker.checkUser(userId);
+    	return bookDao.findAllByUserId(userId);
     }
 
     public MovieSession checkSession(Long sessionId) throws InstanceNotFoundException {
-
-	Optional<MovieSession> session = sessionDao.findById(sessionId);
-
-	if (!session.isPresent()) {
-	    throw new InstanceNotFoundException("project.entities.MovieSession", sessionId);
-	}
-
-	return session.get();
-
+    	Optional<MovieSession> session = sessionDao.findById(sessionId);
+    	if (!session.isPresent()) {
+    		throw new InstanceNotFoundException("project.entities.MovieSession", sessionId);
+    	}
+    	return session.get();
     }
 
-    public Book checkBookByCode(Long code) throws InstanceNotFoundException {
-
-	Optional<Book> book = bookDao.findByCode(code);
-
-	if (!book.isPresent()) {
-	    throw new InstanceNotFoundException("project.entities.Book", code);
-	}
-
-	return book.get();
-
+    public Book checkBookByCode(Long bookId) throws InstanceNotFoundException {
+    	Optional<Book> book = bookDao.findById(bookId);
+    	if (!book.isPresent()) {
+    		throw new InstanceNotFoundException("project.entities.Book", bookId);
+    	}
+    	return book.get();
     }
 
 }

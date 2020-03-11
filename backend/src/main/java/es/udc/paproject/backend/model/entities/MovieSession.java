@@ -30,6 +30,7 @@ public class MovieSession {
 		this.room=room;
 		this.price=price;
 		this.date=date;
+		this.seats = room.getCapacity();
 	}
 	
 	@Id
