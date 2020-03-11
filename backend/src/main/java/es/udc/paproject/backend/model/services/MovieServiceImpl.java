@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +15,7 @@ import es.udc.paproject.backend.model.entities.Movie;
 import es.udc.paproject.backend.model.entities.MovieSession;
 import es.udc.paproject.backend.model.entities.MovieSessionDao;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
+import es.udc.paproject.backend.model.exceptions.PreviousDateException;
 import es.udc.paproject.backend.model.entities.Room;
 import es.udc.paproject.backend.model.entities.RoomDao;
 
@@ -34,7 +33,12 @@ public class MovieServiceImpl implements MovieService {
 	private MovieSessionDao movieSessionDao;
 
 	@Override
-	public Set<Movie> getListing(Long cinemaId, LocalDateTime date) throws InstanceNotFoundException {
+	public Set<Movie> getListing(Long cinemaId, LocalDateTime date) throws InstanceNotFoundException, PreviousDateException {
+		
+		if (date.isBefore(LocalDateTime.now())) {
+			throw new PreviousDateException();
+		}
+		
 		Optional<Cinema> cinema = cinemaDao.findById(cinemaId);
 		if (!cinema.isPresent()) {
 			throw new InstanceNotFoundException("project.entities.cinema", cinemaId);
@@ -52,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
 
 		Set<MovieSession> actualMovieSessions = new HashSet<>();
 		Movie actualMovie = new Movie();
-
+		
 		for (MovieSession movieSession : movieSessions) {
 			if (movieSession.getMovie().getId() != actualMovie.getId()) {
 				if (actualMovie.getId() != null) {
@@ -65,7 +69,9 @@ public class MovieServiceImpl implements MovieService {
 			actualMovieSessions.add(movieSession);
 			actualMovie.setMovieSessions(actualMovieSessions);
 		}
-		movies.add(actualMovie);
+		if (!movies.isEmpty()) {
+			movies.add(actualMovie);
+		}
 		return movies;
 
 	}
