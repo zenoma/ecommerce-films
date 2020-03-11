@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,15 +48,26 @@ public class MovieServiceImpl implements MovieService {
 			movieSessions.addAll(movieSessionDao.findAllByRoomIdAndDate(room.getId(), date));
 		}
 
-		System.out.println(movieSessions.size());
-
 		Set<Movie> movies = new HashSet<>();
 
-		for (MovieSession movieSession : movieSessions) {
-			movies.add(movieSession.getMovie());
-		}
+		Set<MovieSession> actualMovieSessions = new HashSet<>();
+		Movie actualMovie = new Movie();
 
+		for (MovieSession movieSession : movieSessions) {
+			if (movieSession.getMovie().getId() != actualMovie.getId()) {
+				if (actualMovie.getId() != null) {
+					movies.add(actualMovie);
+				}
+				actualMovie = movieSession.getMovie();
+				actualMovie.setMovieSessions(new HashSet<MovieSession>());
+			}
+			actualMovieSessions = actualMovie.getMovieSessions();
+			actualMovieSessions.add(movieSession);
+			actualMovie.setMovieSessions(actualMovieSessions);
+		}
+		movies.add(actualMovie);
 		return movies;
+
 	}
 
 }

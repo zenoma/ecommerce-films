@@ -31,6 +31,9 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,1,5.0,0,"2020-03-07 18:14");
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (3,1,5.0,0,"2020-03-07 22:14");
+
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,1,5.0,0,"2020-04-07 18:14");
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)

@@ -30,9 +30,9 @@ public class MovieServiceTest {
 		List<Long> moviesId = new ArrayList<>();
 		moviesId.add(3L);
 		moviesId.add(4L);
-		Set<Movie> movies = movieService.getListing(1L, LocalDateTime.now());
+		Set<Movie> movies = movieService.getListing(1L, LocalDateTime.of(2020, 03, 07, 18, 14));
 		for (Movie movie : movies) {
-			assertTrue(moviesId.contains(movie.getId()));;
+			assertTrue(moviesId.contains(movie.getId()));
 		}
 	}
 }
