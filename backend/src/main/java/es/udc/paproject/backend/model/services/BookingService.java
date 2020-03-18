@@ -1,25 +1,21 @@
 package es.udc.paproject.backend.model.services;
 
-import java.util.Optional;
 import java.util.Set;
 
 import es.udc.paproject.backend.model.entities.Book;
-import es.udc.paproject.backend.model.entities.Movie;
 import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
+import es.udc.paproject.backend.model.exceptions.CreditCardNumberException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
-import es.udc.paproject.backend.model.exceptions.NotEnoughSeatsException;
-import es.udc.paproject.backend.model.exceptions.UnauthorizedRoleException;
+import es.udc.paproject.backend.model.exceptions.MovieAlreadyStartedException;
+import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
 
 public interface BookingService {
-
-    Optional<Movie> findMovie(Long movieId);
-
     Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
-	    throws InstanceNotFoundException, UnauthorizedRoleException, NotEnoughSeatsException;
+	    throws InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException;
 
-    void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException;
+    void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException;
 
-    Set<Book> getBookRecord(Long userId) throws UnauthorizedRoleException, InstanceNotFoundException;
+    Set<Book> getBookRecord(Long userId) throws InstanceNotFoundException;
 
 }

@@ -1,12 +1,12 @@
 package es.udc.paproject.backend.model.exceptions;
 
 @SuppressWarnings("serial")
-public class NotEnoughSeatsException extends Exception {
+public class NotEnoughtSeatsException extends Exception {
 
     private Long sessionId;
     private int seatsLeft;
 
-    public NotEnoughSeatsException(Long sessionId, int seatsLeft) {
+    public NotEnoughtSeatsException(Long sessionId, int seatsLeft) {
 	this.sessionId = sessionId;
 	this.seatsLeft = seatsLeft;
     }
