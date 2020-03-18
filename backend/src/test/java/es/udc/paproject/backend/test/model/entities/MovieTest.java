@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.paproject.backend.model.entities.Movie;
 import es.udc.paproject.backend.model.entities.MovieDao;
-import es.udc.paproject.backend.model.services.BookingService;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -20,9 +19,6 @@ public class MovieTest {
 		@Autowired
 		private MovieDao movieDao;
 
-		@Autowired
-		private BookingService bookingService;
-
 		private Movie addMovie() {
 			return movieDao.save(new Movie("Batman Begins", "This is a synopsis", 180));
 		}
@@ -30,7 +26,7 @@ public class MovieTest {
 		@Test
 		public void testEqualsMovie() {
 			Movie movie = addMovie();
-			Movie movieFound=bookingService.findMovie(movie.getId()).get();
+			Movie movieFound=movieDao.findById(movie.getId()).get();
 			Movie movieError=new Movie("Batman Begins", "This is a synopsis", 180);
 			
 			movieError.setId(9999999L);

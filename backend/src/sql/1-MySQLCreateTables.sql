@@ -44,8 +44,8 @@ CREATE INDEX CinemaIndexByName ON Cinema(name);
 CREATE TABLE Room (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(60) NOT NULL, 
-    capacity INT NOT NULL,
-    cinemaId BIGINT NOT NULL,
+    	capacity INT NOT NULL,
+    	cinemaId BIGINT NOT NULL,
 	CONSTRAINT RoomPK PRIMARY KEY (id),
 	CONSTRAINT RoomCinemaFK FOREIGN KEY (cinemaId) 
         REFERENCES Cinema (id)
@@ -84,6 +84,7 @@ CREATE TABLE Book(
     credit_card BIGINT NOT NULL,
     userId BIGINT NOT NULL,
     date DATETIME NOT NULL,
+    withdraw BOOLEAN NOT NULL,
 	CONSTRAINT BookPK PRIMARY KEY (id),
 	CONSTRAINT BookMovieSessionFK FOREIGN KEY (movieSessionId) 
         REFERENCES MovieSession (id),
