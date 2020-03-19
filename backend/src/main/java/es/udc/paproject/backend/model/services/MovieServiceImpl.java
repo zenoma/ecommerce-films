@@ -33,12 +33,13 @@ public class MovieServiceImpl implements MovieService {
 	private MovieSessionDao movieSessionDao;
 
 	@Override
-	public Set<Movie> getListing(Long cinemaId, LocalDateTime date) throws InstanceNotFoundException, PreviousDateException {
-		
+	public Set<Movie> getListing(Long cinemaId, LocalDateTime date)
+			throws InstanceNotFoundException, PreviousDateException {
+
 		if (date.isBefore(LocalDateTime.now())) {
 			throw new PreviousDateException();
 		}
-		
+
 		Optional<Cinema> cinema = cinemaDao.findById(cinemaId);
 		if (!cinema.isPresent()) {
 			throw new InstanceNotFoundException("project.entities.cinema", cinemaId);
@@ -56,15 +57,15 @@ public class MovieServiceImpl implements MovieService {
 
 		Set<MovieSession> actualMovieSessions = new HashSet<>();
 		Movie actualMovie = new Movie();
-		
+
 		for (MovieSession movieSession : movieSessions) {
-			if (movieSession.getMovie().getId() != actualMovie.getId()) {
-				if (actualMovie.getId() != null) {
-					movies.add(actualMovie);
-				}
-				actualMovie = movieSession.getMovie();
-				actualMovie.setMovieSessions(new HashSet<MovieSession>());
+
+			actualMovie = movieSession.getMovie();
+			if (actualMovie.getId() != null) {
+				movies.add(actualMovie);
 			}
+			actualMovie.setMovieSessions(new HashSet<MovieSession>());
+
 			actualMovieSessions = actualMovie.getMovieSessions();
 			actualMovieSessions.add(movieSession);
 			actualMovie.setMovieSessions(actualMovieSessions);
