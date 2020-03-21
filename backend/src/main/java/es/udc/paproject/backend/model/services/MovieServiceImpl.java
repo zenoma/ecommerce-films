@@ -35,8 +35,8 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public Set<Movie> getListing(Long cinemaId, LocalDateTime date)
 			throws InstanceNotFoundException, PreviousDateException {
-
-		if (date.isBefore(LocalDateTime.now())) {
+		
+		if (date.isBefore(LocalDateTime.now().withNano(0))) {
 			throw new PreviousDateException();
 		}
 

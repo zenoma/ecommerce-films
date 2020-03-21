@@ -3,9 +3,7 @@ package es.udc.paproject.backend.test.model.services;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -35,6 +33,15 @@ public class MovieServiceTest {
 
 	@Autowired
 	private MovieService movieService;
+	
+	private boolean isTrueGetListingPlusDay(int day, Movie movie) throws InstanceNotFoundException, PreviousDateException {
+		LocalDateTime plusOneDay=LocalDateTime.now().plusDays(day);
+		Cinema cinema = cinemaDao.findByName("Ravachol").get();
+		System.out.println("ME PRUEBO");
+		Set<Movie> movies = movieService.getListing(cinema.getId(), plusOneDay);
+		
+		return movies.contains(movie);
+	}
 
 	@Test
 	public void testGetListing() throws InstanceNotFoundException, PreviousDateException {
@@ -50,9 +57,38 @@ public class MovieServiceTest {
 		
 		assertTrue(movies.containsAll(moviesExpected));
 	}
+	
+	@Test
+	public void testGetListingNow() throws InstanceNotFoundException, PreviousDateException {
+		Set <Movie> moviesExpected = new HashSet<>();
+		Movie movie1 = movieDao.findByTitle("Batman Begins").get();
+		Movie movie2 = movieDao.findByTitle("The Dark Knight").get();
+		moviesExpected.add(movie1);
+		moviesExpected.add(movie2);
+		Cinema cinema = cinemaDao.findByName("Marineda").get();
+		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.now().withNano(0));
+		
+		assertTrue(movies.containsAll(moviesExpected));
+	}
+	
+	@Test
+	public void testGetListingFutureDays() throws InstanceNotFoundException, PreviousDateException {		
+		Movie movie=null;
+		
+		for(int i=0;i<6; i++) {
+			if((i+1) % 3 == 1) {
+				movie=movieDao.findByTitle("Batman Begins").get();
+			} else if((i+1) % 3 == 2) {
+				movie = movieDao.findByTitle("The Dark Knight").get();
+			} else if((i+1) % 3 == 0) {
+				movie = movieDao.findByTitle("The Dark Knight Rises").get();
+			}
+			assertTrue(isTrueGetListingPlusDay(i+1, movie));
+		}
+	}
 
 	@Test
-	public void testGetListing1() throws InstanceNotFoundException, PreviousDateException {
+	public void testGetListingOne() throws InstanceNotFoundException, PreviousDateException {
 		Movie movie = movieDao.findByTitle("The Dark Knight Rises").get();
 		Cinema cinema = cinemaDao.findByName("Marineda").get();
 		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.of(2021, 03, 02, 0, 0));

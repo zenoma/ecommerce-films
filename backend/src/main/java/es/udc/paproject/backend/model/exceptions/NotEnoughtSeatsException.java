@@ -7,15 +7,15 @@ public class NotEnoughtSeatsException extends Exception {
     private int seatsLeft;
 
     public NotEnoughtSeatsException(Long sessionId, int seatsLeft) {
-	this.sessionId = sessionId;
-	this.seatsLeft = seatsLeft;
+    	this.sessionId = sessionId;
+		this.seatsLeft = seatsLeft;
     }
 
     public final Long getSessionId() {
-	return sessionId;
+    	return sessionId;
     }
 
     public final int getSeatsLeft() {
-	return seatsLeft;
+    	return seatsLeft;
     }
 }

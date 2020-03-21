@@ -24,6 +24,7 @@ import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchExcept
 import es.udc.paproject.backend.model.exceptions.CreditCardNumberException;
 import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
+import es.udc.paproject.backend.model.exceptions.InvalidSeatsException;
 import es.udc.paproject.backend.model.exceptions.MovieAlreadyStartedException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
 import es.udc.paproject.backend.model.services.BookingService;
@@ -55,7 +56,7 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testBookTicketandBookRecord() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException{
+	public void testBookTicketandBookRecord() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException,InvalidSeatsException{
 		User user = addUser();
 		MovieSession session = sessionDao.findById(1L).get();
 		Long creditcard = 9352531593525315L;
@@ -82,11 +83,19 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testBookTicketNotEnoughtSeats() throws DuplicateInstanceException{
+	public void testBookTicketInvalidSeats() throws DuplicateInstanceException{
 		User user = addUser();
 		MovieSession session = sessionDao.findById(1L).get();
 		Long creditcard = 9352531593525315L;
-		assertThrows(NotEnoughtSeatsException.class, () -> bookingService.bookTicket(500, creditcard, session.getId(), user.getId()));
+		assertThrows(InvalidSeatsException.class, () -> bookingService.bookTicket(0, creditcard, session.getId(), user.getId()));
+	}
+	
+	@Test
+	public void testBookTicketNotEnoughtSeats() throws DuplicateInstanceException{
+		User user = addUser();
+		MovieSession session = sessionDao.findById(25L).get();
+		Long creditcard = 9352531593525315L;
+		assertThrows(NotEnoughtSeatsException.class, () -> bookingService.bookTicket(10, creditcard, session.getId(), user.getId()));
 	}
 	
 	@Test
@@ -103,7 +112,7 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testDeliverTicket() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException{
+	public void testDeliverTicket() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException, InvalidSeatsException{
 		User user = addUser();
 		MovieSession session = sessionDao.findById(2L).get();
 		Long creditcard = 9352531593525315L;
@@ -124,7 +133,7 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testDeliverTicketCreditCardNoNotMatch() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException {
+	public void testDeliverTicketCreditCardNoNotMatch() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException {
 		User user = addUser();
 		MovieSession session = sessionDao.findById(2L).get();
 		Long creditcard = 9352531593525315L;
@@ -134,7 +143,7 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testDeliverTicketMovieAlreadyStarted() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException{
+	public void testDeliverTicketMovieAlreadyStarted() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException{
 		User user = addUser();
 		MovieSession session = sessionDao.findById(1L).get();
 		Long creditcard = 9352531593525315L;
@@ -144,7 +153,7 @@ public class BookingServiceTest {
 	}
 	
 	@Test
-	public void testDeliverTicketBookAlreadyTaken() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException {
+	public void testDeliverTicketBookAlreadyTaken() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException, InvalidSeatsException {
 		User user = addUser();
 		MovieSession session = sessionDao.findById(2L).get();
 		Long creditcard = 9352531593525315L;
