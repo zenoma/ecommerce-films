@@ -1,10 +1,10 @@
 package es.udc.paproject.backend.model.exceptions;
 
 @SuppressWarnings("serial")
-public class MovieAlreadyStartedException extends Exception{
+public class MovieSessionAlreadyStartedException extends Exception{
 	private Long movieId;
 	
-	public MovieAlreadyStartedException(Long movieId) {
+	public MovieSessionAlreadyStartedException(Long movieId) {
 		this.movieId=movieId;
 	}
 	

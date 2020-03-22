@@ -18,7 +18,7 @@ import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchExcept
 import es.udc.paproject.backend.model.exceptions.CreditCardNumberException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.InvalidSeatsException;
-import es.udc.paproject.backend.model.exceptions.MovieAlreadyStartedException;
+import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
 
 @Service
@@ -36,10 +36,13 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
-	    throws InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException {
+	    throws InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException {
 		User user = permissionChecker.checkUser(userId);
 		
 		MovieSession session = checkSession(sessionId);
+		if(session.getDate().isBefore(LocalDateTime.now())) {
+    		throw new MovieSessionAlreadyStartedException(sessionId);
+    	}
 		int remainingTickets = session.getRoom().getCapacity() - session.getSeats();
 		
 		if(seats<=0 || seats>10) {
@@ -65,10 +68,10 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void deliverTicket(Long creditCard, Long bookId)
-	    throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieAlreadyStartedException {
+	    throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException {
     	Book book = checkBookByCode(bookId);
     	if(book.getMovieSession().getDate().isBefore(LocalDateTime.now())) {
-    		throw new MovieAlreadyStartedException(book.getMovieSession().getId());
+    		throw new MovieSessionAlreadyStartedException(book.getMovieSession().getId());
     	}
 		if (book.getCredit_card() != creditCard) {
 			throw new CodeAndCreditCardNotMatchException(bookId, creditCard);
