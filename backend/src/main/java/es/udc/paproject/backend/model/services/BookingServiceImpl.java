@@ -84,8 +84,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Set<Book> getBookRecord(Long userId) throws InstanceNotFoundException {
-    	//TODO Cambiar Set por Páginas
+    public Block<Book> getBookRecord(Long userId) throws InstanceNotFoundException {
     	permissionChecker.checkUser(userId);
     	return bookDao.findByUserIdOrderByDateDesc(userId);
     }

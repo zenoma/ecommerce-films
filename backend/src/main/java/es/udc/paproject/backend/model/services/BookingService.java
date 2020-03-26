@@ -1,7 +1,5 @@
 package es.udc.paproject.backend.model.services;
 
-import java.util.Set;
-
 import es.udc.paproject.backend.model.entities.Book;
 import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
@@ -17,6 +15,6 @@ public interface BookingService {
 
     void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException;
 
-    Set<Book> getBookRecord(Long userId) throws InstanceNotFoundException;
+    Block<Book> getBookRecord(Long userId) throws InstanceNotFoundException;
 
 }
