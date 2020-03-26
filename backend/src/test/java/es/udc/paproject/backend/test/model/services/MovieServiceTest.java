@@ -22,6 +22,7 @@ import es.udc.paproject.backend.model.entities.MovieSession;
 import es.udc.paproject.backend.model.entities.MovieSessionDao;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
+import es.udc.paproject.backend.model.exceptions.PlusWeekDateException;
 import es.udc.paproject.backend.model.exceptions.PreviousDateException;
 import es.udc.paproject.backend.model.services.MovieService;
 
@@ -32,13 +33,13 @@ public class MovieServiceTest {
 
 	@Autowired
 	private MovieDao movieDao;
-	
+
 	@Autowired
 	private CityDao cityDao;
-	
+
 	@Autowired
 	private MovieSessionDao movieSessionDao;
-	
+
 	@Autowired
 	private CinemaDao cinemaDao;
 
@@ -46,45 +47,40 @@ public class MovieServiceTest {
 	private MovieService movieService;
 
 	private boolean isTrueGetListingPlusDay(int day, Movie movie)
-			throws InstanceNotFoundException, PreviousDateException {
+			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		LocalDateTime plusOneDay = LocalDateTime.now().plusDays(day);
 		Cinema cinema = cinemaDao.findByName("Ravachol").get();
-		System.out.println("ME PRUEBO");
 		Set<Movie> movies = movieService.getListing(cinema.getId(), plusOneDay);
 
 		return movies.contains(movie);
 	}
 
 	@Test
-	public void testGetListing() throws InstanceNotFoundException, PreviousDateException {
+	public void testGetListingNow() throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		Set<Movie> moviesExpected = new HashSet<>();
 		Movie movie1 = movieDao.findByTitle("Batman Begins").get();
 		Movie movie2 = movieDao.findByTitle("The Dark Knight").get();
 		Movie movie3 = movieDao.findByTitle("The Dark Knight Rises").get();
-		moviesExpected.add(movie1);
-		moviesExpected.add(movie2);
-		moviesExpected.add(movie3);
+		LocalDateTime date = LocalDateTime.now();
+		date.withMinute(0);
+		if (date.getHour() <= 0) {
+			moviesExpected.add(movie1);
+		}
+		if (date.getHour() <= 17) {
+			moviesExpected.add(movie2);
+		}
+		if (date.getHour() <= 23) {
+			moviesExpected.add(movie3);
+		}
 		Cinema cinema = cinemaDao.findByName("Marineda").get();
-		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.of(2021, 03, 01, 0, 0));
+		Set<Movie> movies = movieService.getListing(cinema.getId(), date);
 
 		assertTrue(movies.containsAll(moviesExpected));
 	}
 
 	@Test
-	public void testGetListingNow() throws InstanceNotFoundException, PreviousDateException {
-		Set<Movie> moviesExpected = new HashSet<>();
-		Movie movie1 = movieDao.findByTitle("Batman Begins").get();
-		Movie movie2 = movieDao.findByTitle("The Dark Knight").get();
-		moviesExpected.add(movie1);
-		moviesExpected.add(movie2);
-		Cinema cinema = cinemaDao.findByName("Marineda").get();
-		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.now().withNano(0));
-
-		assertTrue(movies.containsAll(moviesExpected));
-	}
-
-	@Test
-	public void testGetListingFutureDays() throws InstanceNotFoundException, PreviousDateException {
+	public void testGetListingFutureDays()
+			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		Movie movie = null;
 
 		for (int i = 0; i < 6; i++) {
@@ -100,25 +96,15 @@ public class MovieServiceTest {
 	}
 
 	@Test
-	public void testGetListingOne() throws InstanceNotFoundException, PreviousDateException {
-		Movie movie = movieDao.findByTitle("The Dark Knight Rises").get();
-		Cinema cinema = cinemaDao.findByName("Marineda").get();
-		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.of(2021, 03, 02, 0, 0));
-
-		assertTrue(movies.contains(movie));
-	}
-
-	@Test
-	public void testGetListingEmpty() throws InstanceNotFoundException, PreviousDateException {
-		Cinema cinema = cinemaDao.findByName("Marineda").get();
-		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.of(2021, 04, 02, 0, 0));
+	public void testGetListingEmpty() throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
+		Cinema cinema = cinemaDao.findByName("Espacio Coruña").get();
+		Set<Movie> movies = movieService.getListing(cinema.getId(), LocalDateTime.now());
 		assertTrue(movies.isEmpty());
 	}
 
 	@Test
 	public void testGetListingInstanceNotFound() {
-		assertThrows(InstanceNotFoundException.class,
-				() -> movieService.getListing(-1L, LocalDateTime.of(2021, 03, 02, 0, 0)));
+		assertThrows(InstanceNotFoundException.class, () -> movieService.getListing(-1L, LocalDateTime.now()));
 	}
 
 	@Test
@@ -150,39 +136,37 @@ public class MovieServiceTest {
 		expectedCinemas.add(cinema2);
 		assertTrue(cinemas.containsAll(expectedCinemas));
 	}
-	
-	@Test 
-	public void testGetCinemasFromNotFoundCity(){
+
+	@Test
+	public void testGetCinemasFromNotFoundCity() {
 		assertThrows(InstanceNotFoundException.class, () -> movieService.getCinemasByCityId(-1L));
 	}
-	
-	
+
 	@Test
 	public void testGetMovieById() throws InstanceNotFoundException {
 		Movie movie = movieDao.findById(2L).get();
 		assertEquals(movie, movieService.getMovieById(2L));
 	}
-	
-	@Test 
-	public void testGetNotFoudMovie(){
+
+	@Test
+	public void testGetNotFoudMovie() {
 		assertThrows(InstanceNotFoundException.class, () -> movieService.getMovieById(-1L));
 	}
-	
+
 	@Test
 	public void testGetMovieSessionById() throws InstanceNotFoundException, MovieSessionAlreadyStartedException {
 		MovieSession ms = movieSessionDao.findById(3L).get();
 		assertEquals(ms, movieService.getMovieSessionById(3L));
 	}
-	
-	@Test 
-	public void testGetNotFoudMovieSession(){
+
+	@Test
+	public void testGetNotFoudMovieSession() {
 		assertThrows(InstanceNotFoundException.class, () -> movieService.getMovieSessionById(-1L));
 	}
-	
-	@Test 
-	public void testGetAlreadyStartedMovieSession(){
+
+	@Test
+	public void testGetAlreadyStartedMovieSession() {
 		assertThrows(MovieSessionAlreadyStartedException.class, () -> movieService.getMovieSessionById(1L));
 	}
-		 
 
 }

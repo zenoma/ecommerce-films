@@ -28,8 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/users/signUp").permitAll()
 			.antMatchers("/users/login").permitAll()
 			.antMatchers("/users/loginFromServiceToken").permitAll()
+			.antMatchers("/listing").permitAll()
 			.antMatchers("/listing/city").permitAll()
 			.antMatchers("/listing/city/{cityId}").permitAll()
+			.antMatchers("/listing/movie/{movieId}").permitAll()
+			.antMatchers("/listing/movieSession/{movieSessionId}").permitAll()
 			.anyRequest().hasRole("USER");
 
 	}

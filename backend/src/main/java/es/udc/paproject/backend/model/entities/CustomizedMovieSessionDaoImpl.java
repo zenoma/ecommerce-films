@@ -13,20 +13,24 @@ public class CustomizedMovieSessionDaoImpl implements CustomizedMovieSessionDao 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<MovieSession> findAllByRoomIdAndDate(Long roomId, LocalDateTime date) {
 
-		String queryString = "SELECT ms, m FROM MovieSession ms, Movie m WHERE year(ms.date) = ";
+		String queryString = "SELECT ms, m, r FROM MovieSession ms, Movie m, Room r WHERE ms.room = "
+				+ String.valueOf(roomId) + " AND year(ms.date) = ";
 		queryString += String.valueOf(date.getYear());
 		queryString += " AND month(ms.date) = ";
 		queryString += String.valueOf(date.getMonthValue());
 		queryString += " AND day(ms.date) = ";
 		queryString += String.valueOf(date.getDayOfMonth());
+		queryString += " AND hour(ms.date) >= ";
+		queryString += String.valueOf(date.getHour());
+		queryString += " AND minute(ms.date) >= ";
+		queryString += String.valueOf(date.getMinute());
 		queryString += " ORDER BY m.id";
 		Query query = entityManager.createQuery(queryString);
-				
+
 		Set<MovieSession> resultList = new HashSet<>(query.getResultList());
 		return resultList;
 	}

@@ -66,6 +66,15 @@ INSERT INTO Room(name,capacity,cinemaId)
 INSERT INTO Room(name,capacity,cinemaId)
     VALUES ("Sala 3", 80, 4);
 
+INSERT INTO Room(name,capacity,cinemaId)
+    VALUES ("Sala A", 50, 5);
+
+INSERT INTO Room(name,capacity,cinemaId)
+    VALUES ("Sala B", 10, 5);
+
+INSERT INTO Room(name,capacity,cinemaId)
+    VALUES ("Sala C", 5, 5);
+
 INSERT INTO Movie(title,synopsis,duration)
 	VALUES ("Batman Begins", "This is a synopsis",180);
 
@@ -76,72 +85,35 @@ INSERT INTO Movie(title,synopsis,duration)
 	VALUES ("The Dark Knight Rises", "This is a more longer synopsis",220);
 
 
-# Sesiones de Marineda
+#Cine Marineda
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,1,5.0,0,"2020-03-01 22:00");
-
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,1,5.0,0,"2021-03-01 22:00");
+    VALUES (1,1,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (2,2,5.0,0,"2021-03-01 22:00");
+    VALUES (2,2,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '0 17:00' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,3,5.0,0,"2021-03-01 22:00");
+    VALUES (3,3,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '0 23:55' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,3,5.0,0,"2021-03-02 22:00");
-
-# Sesiones de Espacio Coruña
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,4,5.0,0,"2021-03-01 20:00");
+    VALUES (1,1,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (2,5,5.0,0,"2021-03-01 20:00");
+    VALUES (1,2,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '1 17:00' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,6,5.0,0,"2021-03-01 20:00");
+    VALUES (1,3,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '1 23:55' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,6,5.0,0,"2021-03-02 20:00");
-
-# Sesiones de Muralla
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,7,5.0,0,"2021-03-01 18:00");
+    VALUES (2,1,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (2,8,5.0,0,"2021-03-01 18:00");
+    VALUES (2,2,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '2 17:00' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,9,5.0,0,"2021-03-01 18:00");
+    VALUES (3,3,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '2 23:55' DAY_MINUTE));
 
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,9,5.0,0,"2021-03-02 18:00");
-
-# Sesiones de As Termas
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,10,5.0,0,"2021-03-01 20:00");
-
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (2,11,5.0,0,"2021-03-01 20:00");
-
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,12,5.0,0,"2021-03-01 20:00");
-
-INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (3,12,5.0,0,"2021-03-02 20:00");
-
-
-## ENTREGA ITERACIÓN 1
-INSERT INTO Room(name,capacity,cinemaId)
-    VALUES ("Sala A", 50, 5);
-
-INSERT INTO Room(name,capacity,cinemaId)
-    VALUES ("Sala B", 10, 5);
-
-INSERT INTO Room(name,capacity,cinemaId)
-    VALUES ("Sala C", 5, 5);
-
+#Cine Ravachol
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (1,13,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
 
@@ -158,6 +130,9 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (1,14,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,14,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '1 17:00' DAY_MINUTE));
+
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (2,14,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '2 23:55' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
@@ -171,3 +146,4 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,15,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '6 20:00' DAY_MINUTE));
+

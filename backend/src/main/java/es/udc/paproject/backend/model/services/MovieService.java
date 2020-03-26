@@ -9,11 +9,13 @@ import es.udc.paproject.backend.model.entities.Movie;
 import es.udc.paproject.backend.model.entities.MovieSession;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
+import es.udc.paproject.backend.model.exceptions.PlusWeekDateException;
 import es.udc.paproject.backend.model.exceptions.PreviousDateException;
 
 public interface MovieService {
 
-	Set<Movie> getListing(Long cinemaId, LocalDateTime date) throws InstanceNotFoundException, PreviousDateException;
+	Set<Movie> getListing(Long cinemaId, LocalDateTime date)
+			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException;
 
 	Set<City> getAllCities();
 

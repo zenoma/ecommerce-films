@@ -1,7 +1,9 @@
 package es.udc.paproject.backend.model.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,6 +21,7 @@ import es.udc.paproject.backend.model.entities.MovieSession;
 import es.udc.paproject.backend.model.entities.MovieSessionDao;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
+import es.udc.paproject.backend.model.exceptions.PlusWeekDateException;
 import es.udc.paproject.backend.model.exceptions.PreviousDateException;
 import es.udc.paproject.backend.model.entities.Room;
 import es.udc.paproject.backend.model.entities.RoomDao;
@@ -44,10 +47,15 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public Set<Movie> getListing(Long cinemaId, LocalDateTime date)
-			throws InstanceNotFoundException, PreviousDateException {
+			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 
 		if (date.isBefore(LocalDateTime.now().withNano(0))) {
 			throw new PreviousDateException();
+		}else if (date.isAfter(LocalDateTime.now().plusDays(7).withHour(0).withMinute(0).withSecond(0))){
+			throw new PlusWeekDateException();
+			
+		} else if (date.isAfter(LocalDateTime.now().plusDays(1).withHour(0).withMinute(0).withSecond(0))) {
+			date = date.withHour(0).withMinute(0).withSecond(0);
 		}
 
 		Optional<Cinema> cinema = cinemaDao.findById(cinemaId);
@@ -63,27 +71,30 @@ public class MovieServiceImpl implements MovieService {
 			movieSessions.addAll(movieSessionDao.findAllByRoomIdAndDate(room.getId(), date));
 		}
 
-		Set<Movie> movies = new HashSet<>();
+		List<Movie> movies = new ArrayList<>();
 
 		Set<MovieSession> actualMovieSessions = new HashSet<>();
 		Movie actualMovie = new Movie();
 
 		for (MovieSession movieSession : movieSessions) {
-
 			actualMovie = movieSession.getMovie();
-			if (actualMovie.getId() != null) {
-				movies.add(actualMovie);
+			if (!movies.contains(actualMovie)) {
+				actualMovie.setMovieSessions(new HashSet<MovieSession>());
+			} else {
+				for (Movie movie : movies) {
+					if (movie.getTitle().equals(actualMovie.getTitle())) {
+						actualMovie = movie;
+						break;
+					}
+				}
+				movies.remove(actualMovie);
 			}
-			actualMovie.setMovieSessions(new HashSet<MovieSession>());
-
 			actualMovieSessions = actualMovie.getMovieSessions();
 			actualMovieSessions.add(movieSession);
 			actualMovie.setMovieSessions(actualMovieSessions);
-		}
-		if (!movies.isEmpty()) {
 			movies.add(actualMovie);
 		}
-		return movies;
+		return new HashSet<Movie>(movies);
 
 	}
 
