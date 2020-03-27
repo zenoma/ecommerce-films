@@ -1,10 +1,10 @@
 package es.udc.paproject.backend.model.entities;
 
-import java.util.Set;
-
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface BookDao extends PagingAndSortingRepository<Book, Long> {
 
-    Set<Book> findByUserIdOrderByDateDesc(Long userId);
+    Slice<Book> findByUserIdOrderByDateDesc(Long userId, Pageable pageable);
 }
