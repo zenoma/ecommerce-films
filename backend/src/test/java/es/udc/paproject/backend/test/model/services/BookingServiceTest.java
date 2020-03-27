@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import es.udc.paproject.backend.model.entities.Book;
 import es.udc.paproject.backend.model.entities.BookDao;
@@ -26,6 +25,7 @@ import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.InvalidSeatsException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
+import es.udc.paproject.backend.model.services.Block;
 import es.udc.paproject.backend.model.services.BookingService;
 import es.udc.paproject.backend.model.services.UserService;
 
@@ -63,10 +63,10 @@ public class BookingServiceTest {
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
-		Set<Book> books = bookingService.getBookRecord(user.getId());
+		Block<Book> books = bookingService.getBookRecord(user.getId(), 1, 10);
 		Book expectedBook = new Book(3, session, creditcard, user, LocalDateTime.now().withNano(0), false);
 		expectedBook.setId(bookId);
-		assertTrue(books.contains(expectedBook));
+		assertTrue(books.getItems().contains(expectedBook));
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class BookingServiceTest {
 
 	@Test
 	public void testBookRecordUserNotExist() {
-		assertThrows(InstanceNotFoundException.class, () -> bookingService.getBookRecord(500L));
+		assertThrows(InstanceNotFoundException.class, () -> bookingService.getBookRecord(500L, 1, 10));
 	}
 
 	@Test

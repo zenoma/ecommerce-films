@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/listing/city/{cityId}").permitAll()
 			.antMatchers("/listing/movie/{movieId}").permitAll()
 			.antMatchers("/listing/movieSession/{movieSessionId}").permitAll()
+			.antMatchers("/book/deliverticket").hasRole("TICKETSELLER")
 			.anyRequest().hasRole("USER");
 
 	}

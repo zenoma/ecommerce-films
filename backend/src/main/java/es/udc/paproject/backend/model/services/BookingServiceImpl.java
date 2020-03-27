@@ -2,9 +2,10 @@ package es.udc.paproject.backend.model.services;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,7 +74,7 @@ public class BookingServiceImpl implements BookingService {
     	if(book.getMovieSession().getDate().isBefore(LocalDateTime.now())) {
     		throw new MovieSessionAlreadyStartedException(book.getMovieSession().getId());
     	}
-		if (book.getCredit_card() != creditCard) {
+		if (!book.getCredit_card().equals(creditCard)) {
 			throw new CodeAndCreditCardNotMatchException(bookId, creditCard);
 		}
 		if (book.isWithdraw()) {
@@ -84,10 +85,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Set<Book> getBookRecord(Long userId) throws InstanceNotFoundException {
-    	//TODO Cambiar Set por Páginas
+    public Block<Book> getBookRecord(Long userId, int page, int size) throws InstanceNotFoundException {
     	permissionChecker.checkUser(userId);
-    	return bookDao.findByUserIdOrderByDateDesc(userId);
+    	Slice<Book> books=bookDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(page, size));
+    	
+    	return new Block<Book>(books.getContent(), books.hasNext());
     }
 
     private MovieSession checkSession(Long sessionId) throws InstanceNotFoundException {
