@@ -68,13 +68,13 @@ public class MovieServiceTest {
 		Set<Movie> movies;
 		LocalDateTime date = LocalDateTime.now();
 
-		if (date.compareTo(movieSession1.getDate()) >= 0) {
+		if (date.compareTo(movieSession1.getDate()) < 0) {
 			moviesExpected.add(movie1);
 		}
-		if (date.compareTo(movieSession2.getDate()) >= 0) {
+		if (date.compareTo(movieSession2.getDate()) < 0) {
 			moviesExpected.add(movie2);
 		}
-		if (date.compareTo(movieSession3.getDate()) >= 0) {
+		if (date.compareTo(movieSession3.getDate()) < 0) {
 			moviesExpected.add(movie3);
 		}
 

@@ -24,14 +24,27 @@ public class CustomizedMovieSessionDaoImpl implements CustomizedMovieSessionDao 
 		queryString += String.valueOf(date.getMonthValue());
 		queryString += " AND day(ms.date) = ";
 		queryString += String.valueOf(date.getDayOfMonth());
-		queryString += " AND hour(ms.date) >= ";
+		queryString += " AND hour(ms.date) > ";
 		queryString += String.valueOf(date.getHour());
-		queryString += " AND minute(ms.date) >= ";
-		queryString += String.valueOf(date.getMinute());
 		queryString += " ORDER BY m.id";
 		Query query = entityManager.createQuery(queryString);
 
+		String queryString2 = "SELECT ms, m, r FROM MovieSession ms, Movie m, Room r WHERE ms.room = "
+				+ String.valueOf(roomId) + " AND year(ms.date) = ";
+		queryString2 += String.valueOf(date.getYear());
+		queryString2 += " AND month(ms.date) = ";
+		queryString2 += String.valueOf(date.getMonthValue());
+		queryString2 += " AND day(ms.date) = ";
+		queryString2 += String.valueOf(date.getDayOfMonth());
+		queryString2 += " AND hour(ms.date) = ";
+		queryString2 += String.valueOf(date.getHour());
+		queryString2 += " AND minute(ms.date) >= ";
+		queryString2 += String.valueOf(date.getMinute());
+		queryString2 += " ORDER BY m.id";
+		Query query2 = entityManager.createQuery(queryString2);
+
 		Set<MovieSession> resultList = new HashSet<>(query.getResultList());
+		resultList.addAll(new HashSet<>(query2.getResultList()));
 		return resultList;
 	}
 
