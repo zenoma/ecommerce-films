@@ -59,7 +59,7 @@ public class BookingServiceTest {
 			throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException,
 			CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(3L).get();
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
@@ -96,7 +96,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketInvalidSeats() throws DuplicateInstanceException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(9L).get();
 		Long creditcard = 9352531593525315L;
 		assertThrows(InvalidSeatsException.class,
 				() -> bookingService.bookTicket(0, creditcard, session.getId(), user.getId()));
@@ -105,7 +105,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketNotEnoughtSeats() throws DuplicateInstanceException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(25L).get();
+		MovieSession session = sessionDao.findById(20L).get();
 		Long creditcard = 9352531593525315L;
 		assertThrows(NotEnoughtSeatsException.class,
 				() -> bookingService.bookTicket(10, creditcard, session.getId(), user.getId()));
@@ -114,7 +114,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketCreditCardNumber() throws DuplicateInstanceException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(7L).get();
 		Long creditcard = 935253159L;
 		assertThrows(CreditCardNumberException.class,
 				() -> bookingService.bookTicket(3, creditcard, session.getId(), user.getId()));
@@ -130,7 +130,7 @@ public class BookingServiceTest {
 			NotEnoughtSeatsException, CreditCardNumberException, CodeAndCreditCardNotMatchException,
 			BookAlreadyTakenException, MovieSessionAlreadyStartedException, InvalidSeatsException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(16L).get();
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
@@ -153,7 +153,7 @@ public class BookingServiceTest {
 			throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException,
 			CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(7L).get();
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
@@ -165,10 +165,10 @@ public class BookingServiceTest {
 			throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException,
 			CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(27L).get();
+		MovieSession session = sessionDao.findById(4L).get();
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());	
-		session.setDate(session.getDate().minusYears(1));
+		session.setDate(session.getDate().minusDays(1));
 		sessionDao.save(session);	
 
 		assertThrows(MovieSessionAlreadyStartedException.class, () -> bookingService.deliverTicket(creditcard, bookId));
@@ -179,7 +179,7 @@ public class BookingServiceTest {
 			NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException,
 			MovieSessionAlreadyStartedException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException {
 		User user = addUser();
-		MovieSession session = sessionDao.findById(2L).get();
+		MovieSession session = sessionDao.findById(8L).get();
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
