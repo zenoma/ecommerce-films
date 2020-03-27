@@ -15,6 +15,6 @@ public interface BookingService {
 
     void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException;
 
-    Block<Book> getBookRecord(Long userId) throws InstanceNotFoundException;
+    Block<Book> getBookRecord(Long userId, int page, int size) throws InstanceNotFoundException;
 
 }

@@ -1,16 +1,12 @@
 package es.udc.paproject.backend.rest.controllers;
 
-import static es.udc.paproject.backend.rest.dtos.UserConversor.toAuthenticatedUserDto;
-import static es.udc.paproject.backend.rest.dtos.UserConversor.toUser;
-import static es.udc.paproject.backend.rest.dtos.UserConversor.toUserDto;
+import static es.udc.paproject.backend.rest.dtos.BookConversor.toBookDtos;
 
-import java.net.URI;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +16,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import es.udc.paproject.backend.model.entities.Book;
-import es.udc.paproject.backend.model.entities.User;
 import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
 import es.udc.paproject.backend.model.exceptions.CreditCardNumberException;
-import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
-import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.paproject.backend.model.exceptions.InvalidSeatsException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
@@ -40,11 +33,9 @@ import es.udc.paproject.backend.model.exceptions.PermissionException;
 import es.udc.paproject.backend.model.services.Block;
 import es.udc.paproject.backend.model.services.BookingService;
 import es.udc.paproject.backend.rest.common.ErrorsDto;
-import es.udc.paproject.backend.rest.common.JwtGenerator;
-import es.udc.paproject.backend.rest.common.JwtInfo;
-import es.udc.paproject.backend.rest.dtos.AuthenticatedUserDto;
+import es.udc.paproject.backend.rest.dtos.BlockDto;
 import es.udc.paproject.backend.rest.dtos.BookParamsDto;
-import es.udc.paproject.backend.rest.dtos.UserDto;
+import es.udc.paproject.backend.rest.dtos.IdDto;
 
 @RestController
 @RequestMapping("/book")
@@ -137,11 +128,12 @@ public class BookController {
 	}
 	
 	@PostMapping("/bookticket")
-	public Long bookTicket(
+	public IdDto bookTicket(
 		@Validated({BookParamsDto.AllValidations.class}) @RequestBody BookParamsDto bookParamsDto) throws InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException{
 		
-		return bookingService.bookTicket(bookParamsDto.getTickets(), bookParamsDto.getCredit_card(), bookParamsDto.getMovieSession().getId(), bookParamsDto.getUser().getId());
-		
+		return new IdDto(
+				bookingService.bookTicket(bookParamsDto.getTickets(), bookParamsDto.getCredit_card(), bookParamsDto.getMovieSession().getId(), bookParamsDto.getUser().getId())
+		);
 	}
 	
 	@PutMapping("/deliverticket")
@@ -152,10 +144,15 @@ public class BookController {
 		
 	}
 	
-	@GetMapping("/{userId}")
-	public Block<Book> findOrder(@PathVariable Long userId) throws InstanceNotFoundException {
+	@GetMapping("/{user}")
+	public BlockDto<BookParamsDto> findOrder(@RequestAttribute Long userId, @PathVariable Long user, @RequestParam(defaultValue="0") int page) throws InstanceNotFoundException, PermissionException {
+		if(user!=userId) {
+			throw new PermissionException();
+		}
 		
-		return bookingService.getBookRecord(userId);
+		Block<Book> books = bookingService.getBookRecord(user, page, 10);
+		
+		return new BlockDto<>(toBookDtos(books.getItems()), books.getExistMoreItems());
 		
 	}
 	
