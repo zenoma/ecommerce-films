@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/users/signUp").permitAll()
 			.antMatchers("/users/login").permitAll()
 			.antMatchers("/users/loginFromServiceToken").permitAll()
+			.antMatchers("/book/deliverticket").hasRole("TICKETSELLER")
 			.anyRequest().hasRole("USER");
 
 	}

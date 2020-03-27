@@ -74,7 +74,7 @@ public class BookingServiceImpl implements BookingService {
     	if(book.getMovieSession().getDate().isBefore(LocalDateTime.now())) {
     		throw new MovieSessionAlreadyStartedException(book.getMovieSession().getId());
     	}
-		if (book.getCredit_card() != creditCard) {
+		if (!book.getCredit_card().equals(creditCard)) {
 			throw new CodeAndCreditCardNotMatchException(bookId, creditCard);
 		}
 		if (book.isWithdraw()) {

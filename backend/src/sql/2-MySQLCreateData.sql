@@ -171,3 +171,7 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,15,5.0,0, DATE_ADD(DATE(NOW()), INTERVAL '6 20:00' DAY_MINUTE));
+
+
+INSERT INTO User(userName, password, firstName, lastName, email, role)
+	VALUES("ticketseller", "$2a$10$z0Ug3gPwsAf1ttTn8LQOEuJRXJBR95rpxynLLP8xLSoMp634HJi36", "firstName", "lastName", "email@email", 1);
