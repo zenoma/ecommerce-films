@@ -59,21 +59,26 @@ public class MovieServiceTest {
 	public void testGetListingNow() throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		Set<Movie> moviesExpected = new HashSet<>();
 		Movie movie1 = movieDao.findByTitle("Batman Begins").get();
+		MovieSession movieSession1 = movieSessionDao.findById(1L).get();
 		Movie movie2 = movieDao.findByTitle("The Dark Knight").get();
+		MovieSession movieSession2 = movieSessionDao.findById(2L).get();
 		Movie movie3 = movieDao.findByTitle("The Dark Knight Rises").get();
+		MovieSession movieSession3 = movieSessionDao.findById(3L).get();
+		
+		Set<Movie> movies;
 		LocalDateTime date = LocalDateTime.now();
-		date.withMinute(0);
-		if (date.getHour() <= 0) {
+
+		if (date.compareTo(movieSession1.getDate()) >= 0) {
 			moviesExpected.add(movie1);
 		}
-		if (date.getHour() <= 17) {
+		if (date.compareTo(movieSession2.getDate()) >= 0) {
 			moviesExpected.add(movie2);
 		}
-		if (date.getHour() <= 23) {
+		if (date.compareTo(movieSession3.getDate()) >= 0) {
 			moviesExpected.add(movie3);
 		}
-		Cinema cinema = cinemaDao.findByName("Marineda").get();
-		Set<Movie> movies = movieService.getListing(cinema.getId(), date);
+
+		movies = movieService.getListing(1L, date);
 
 		assertTrue(movies.containsAll(moviesExpected));
 	}
