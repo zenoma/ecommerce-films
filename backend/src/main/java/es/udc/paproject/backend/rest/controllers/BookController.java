@@ -69,7 +69,7 @@ public class BookController {
 	}
 
 	@ExceptionHandler(InvalidSeatsException.class)
-	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ErrorsDto handleInvalidSeatsException(InvalidSeatsException exception, Locale locale) {
 
@@ -81,12 +81,12 @@ public class BookController {
 	}
 
 	@ExceptionHandler(CreditCardNumberException.class)
-	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ErrorsDto handleCreditCardNumberException(CreditCardNumberException exception, Locale locale) {
 
-		String errorMessage = messageSource.getMessage(CREDIT_CARD_NUMBER_EXCEPTION_CODE, null,
-				CREDIT_CARD_NUMBER_EXCEPTION_CODE, locale);
+		String errorMessage = messageSource.getMessage(CREDIT_CARD_NUMBER_EXCEPTION_CODE,
+				new Object[] {exception.getCreditCard()},CREDIT_CARD_NUMBER_EXCEPTION_CODE, locale);
 
 		return new ErrorsDto(errorMessage);
 
@@ -98,21 +98,21 @@ public class BookController {
 	public ErrorsDto handleMovieSessionAlreadyStartedException(MovieSessionAlreadyStartedException exception,
 			Locale locale) {
 
-		String errorMessage = messageSource.getMessage(MOVIE_SESSION_ALREADY_STARTED_EXCEPTION_CODE, null,
-				MOVIE_SESSION_ALREADY_STARTED_EXCEPTION_CODE, locale);
+		String errorMessage = messageSource.getMessage(MOVIE_SESSION_ALREADY_STARTED_EXCEPTION_CODE,
+				new Object[] {exception.getMovieId()},MOVIE_SESSION_ALREADY_STARTED_EXCEPTION_CODE, locale);
 
 		return new ErrorsDto(errorMessage);
 
 	}
 
 	@ExceptionHandler(CodeAndCreditCardNotMatchException.class)
-	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ErrorsDto handleCodeAndCreditCardNotMatchException(CodeAndCreditCardNotMatchException exception,
 			Locale locale) {
 
-		String errorMessage = messageSource.getMessage(CODE_AND_CREDITCARD_NOT_MATCH_EXCEPTION_CODE, null,
-				CODE_AND_CREDITCARD_NOT_MATCH_EXCEPTION_CODE, locale);
+		String errorMessage = messageSource.getMessage(CODE_AND_CREDITCARD_NOT_MATCH_EXCEPTION_CODE, 
+				new Object[] {exception.getCode(), exception.getCreditCard()}, CODE_AND_CREDITCARD_NOT_MATCH_EXCEPTION_CODE, locale);
 
 		return new ErrorsDto(errorMessage);
 
@@ -123,8 +123,8 @@ public class BookController {
 	@ResponseBody
 	public ErrorsDto handleBookAlreadyTakenException(BookAlreadyTakenException exception, Locale locale) {
 
-		String errorMessage = messageSource.getMessage(BOOK_ALREADY_TAKEN_EXCEPTION_CODE, null,
-				BOOK_ALREADY_TAKEN_EXCEPTION_CODE, locale);
+		String errorMessage = messageSource.getMessage(BOOK_ALREADY_TAKEN_EXCEPTION_CODE,
+				new Object[] {exception.getBookId()},BOOK_ALREADY_TAKEN_EXCEPTION_CODE, locale);
 
 		return new ErrorsDto(errorMessage);
 

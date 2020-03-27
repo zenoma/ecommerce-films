@@ -153,5 +153,5 @@ INSERT INTO User(userName, password, firstName, lastName, email, role)
   VALUES("ticketseller", "$2a$10$z0Ug3gPwsAf1ttTn8LQOEuJRXJBR95rpxynLLP8xLSoMp634HJi36", "firstName", "lastName", "email@email", 1);
 
 INSERT INTO User(userName, password, firstName, lastName, email, role)
-  VALUES("viwer", "$2a$10$P3ugvsOwhc70AD0uZ9pu0uK8kuqwS1nD6PRfI0BSJY6UKSXSSBiwm", "firstName", "lastName", "email@email", 0);
+  VALUES("viewer", "$2a$10$IOfpqVzvivFzGbTYYIxHoeCtVjkH1rgjlyXPi7pnO2hYKdfjcDrZG", "firstName", "lastName", "email@email", 0);
 

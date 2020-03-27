@@ -63,7 +63,7 @@ public class BookingServiceTest {
 		Long creditcard = 9352531593525315L;
 		Long bookId = bookingService.bookTicket(3, creditcard, session.getId(), user.getId());
 
-		Block<Book> books = bookingService.getBookRecord(user.getId(), 1, 10);
+		Block<Book> books = bookingService.getBookRecord(user.getId(), 0, 10);
 		Book expectedBook = new Book(3, session, creditcard, user, LocalDateTime.now().withNano(0), false);
 		expectedBook.setId(bookId);
 		assertTrue(books.getItems().contains(expectedBook));
