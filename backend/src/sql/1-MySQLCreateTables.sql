@@ -70,6 +70,7 @@ CREATE TABLE MovieSession(
     price DECIMAL(11, 2) NOT NULL,
 	seats SMALLINT NOT NULL,
     date DATETIME NOT NULL,
+    version BIGINT NOT NULL,
 	CONSTRAINT SessionPK PRIMARY KEY (id),
 	CONSTRAINT MovieSessionFK FOREIGN KEY (movieId) 
         REFERENCES Movie (id),

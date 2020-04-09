@@ -16,10 +16,11 @@ public class MovieListingConversor {
 	}
 
 	public final static MovieListingDto toMovieListingDto(Movie movieListing) {
-		List<MovieSessionListingDto> sessions = movieListing.getMovieSessions().stream()
-				.map(i -> toMovieSessionListingDto(i)).collect(Collectors.toList());
+		//List<MovieSessionListingDto> sessions = movieListing.getMovieSessions().stream()
+		//		.map(i -> toMovieSessionListingDto(i)).collect(Collectors.toList());
 
-		return new MovieListingDto(movieListing.getId(), movieListing.getTitle(), movieListing.getSynopsis(),
-				movieListing.getDuration(), sessions);
+		//return new MovieListingDto(movieListing.getId(), movieListing.getTitle(), movieListing.getSynopsis(),
+		//		movieListing.getDuration(), sessions);
+		return null;
 	}
 }

@@ -122,7 +122,8 @@ public class ListingController {
 		} else {
 			localDateTime = LocalDateTime.of(LocalDate.parse(date), LocalTime.now());
 		}
-		Set<Movie> movies = movieService.getListing(cinemaId, localDateTime);
-		return toMovieListingDtos(movies);
+		//Set<Movie> movies = movieService.getListing(cinemaId, localDateTime);
+		//return toMovieListingDtos(movies);
+		return null;
 	}
 }

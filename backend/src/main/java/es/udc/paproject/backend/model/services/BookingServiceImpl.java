@@ -16,9 +16,7 @@ import es.udc.paproject.backend.model.entities.MovieSessionDao;
 import es.udc.paproject.backend.model.entities.User;
 import es.udc.paproject.backend.model.exceptions.BookAlreadyTakenException;
 import es.udc.paproject.backend.model.exceptions.CodeAndCreditCardNotMatchException;
-import es.udc.paproject.backend.model.exceptions.CreditCardNumberException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
-import es.udc.paproject.backend.model.exceptions.InvalidSeatsException;
 import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedException;
 import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
 
@@ -37,24 +35,17 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
-	    throws InstanceNotFoundException, NotEnoughtSeatsException, CreditCardNumberException, InvalidSeatsException, MovieSessionAlreadyStartedException {
+	    throws InstanceNotFoundException, NotEnoughtSeatsException, MovieSessionAlreadyStartedException {
 		User user = permissionChecker.checkUser(userId);
 		
 		MovieSession session = checkSession(sessionId);
 		if(session.getDate().isBefore(LocalDateTime.now())) {
     		throw new MovieSessionAlreadyStartedException(sessionId);
     	}
-		int remainingTickets = session.getRoom().getCapacity() - session.getSeats();
-		
-		if(seats<=0 || seats>10) {
-			throw new InvalidSeatsException(seats);
-		}
 			
-		if (remainingTickets < seats) {
+		if (session.getSeats() < seats) {
 		    throw new NotEnoughtSeatsException(sessionId, session.getSeats());
 		}
-		
-		creditCard=checkCreditCardNumber(creditCard);
 	
 		session.setSeats(session.getSeats() + seats);
 	
@@ -106,13 +97,5 @@ public class BookingServiceImpl implements BookingService {
     		throw new InstanceNotFoundException("project.entities.Book", bookId);
     	}
     	return book.get();
-    }
-
-    private Long checkCreditCardNumber(Long creditCard) throws CreditCardNumberException {
-    	if(creditCard.toString().length()!=16) {
-    		throw new CreditCardNumberException(creditCard);
-    	}
-    	
-    	return creditCard;
     }
 }
