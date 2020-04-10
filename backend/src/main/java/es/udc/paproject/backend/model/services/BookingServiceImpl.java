@@ -76,6 +76,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public Block<Book> getBookRecord(Long userId, int page, int size) throws InstanceNotFoundException {
     	permissionChecker.checkUser(userId);
     	Slice<Book> books=bookDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(page, size));
