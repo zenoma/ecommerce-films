@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -139,7 +140,7 @@ public class BookingServiceTest {
 				for(int j=0;j<24; j+=HOUR_BETWEEN_SESSION) {
 					int minutes=30;
 					if(j%2!=0) minutes=55;
-					MovieSession movieSession=new MovieSession(movie, room, 8.20, LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
+					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
 					movieSession=movieSessionDao.save(movieSession);
 					movieSessions.add(movieSession);
 				}
@@ -186,7 +187,7 @@ public class BookingServiceTest {
 			}
 		}
 		
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		Long bookId = bookingService.bookTicket(3, creditcard, movieSession.getId(), user.getId());
 
 		Block<Book> books = bookingService.getBookRecord(user.getId(), 0, 10);
@@ -197,7 +198,7 @@ public class BookingServiceTest {
 	
 	@Test
 	public void testBookTicketSessionNotFound() {
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		assertThrows(InstanceNotFoundException.class,
 				() -> bookingService.bookTicket(3, creditcard, -1L, user.getId()));
 	}
@@ -205,7 +206,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketMovieSessionAlreadyStarted() {
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isBefore(LocalDateTime.now())) {
@@ -223,7 +224,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketUserNotFound() {
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now())) {
@@ -241,7 +242,7 @@ public class BookingServiceTest {
 	@Test
 	public void testBookTicketNotEnoughtSeats() throws DuplicateInstanceException {
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now())) {
@@ -265,7 +266,7 @@ public class BookingServiceTest {
 			BookAlreadyTakenException, MovieSessionAlreadyStartedException {
 		
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now()) && mv.getRoom().getCapacity()>3) {
@@ -285,7 +286,7 @@ public class BookingServiceTest {
 	
 	@Test
 	public void testDeliverTicketBookNotExist() {
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 
 		assertThrows(InstanceNotFoundException.class, () -> bookingService.deliverTicket(creditcard, -1L));
 	}
@@ -293,7 +294,7 @@ public class BookingServiceTest {
 	@Test
 	public void testDeliverTicketCreditCardNoNotMatch() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, MovieSessionAlreadyStartedException {
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now())) {
@@ -304,13 +305,13 @@ public class BookingServiceTest {
 		
 		Long bookId = bookingService.bookTicket(3, creditcard, movieSession.getId(), user.getId());
 
-		assertThrows(CodeAndCreditCardNotMatchException.class, () -> bookingService.deliverTicket(93525315L, bookId));
+		assertThrows(CodeAndCreditCardNotMatchException.class, () -> bookingService.deliverTicket("93525315", bookId));
 	}
 	
 	@Test
 	public void testDeliverTicketMovieAlreadyStarted() throws DuplicateInstanceException, InstanceNotFoundException, NotEnoughtSeatsException, MovieSessionAlreadyStartedException {
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now())) {
@@ -331,7 +332,7 @@ public class BookingServiceTest {
 			MovieSessionAlreadyStartedException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException {
 
 		MovieSession movieSession=new MovieSession();
-		Long creditcard = 9352531593525315L;
+		String creditcard = "9352531593525315";
 		
 		for(MovieSession mv:movieSessions) {
 			if(mv.getDate().isAfter(LocalDateTime.now())) {

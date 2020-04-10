@@ -2,25 +2,28 @@ package es.udc.paproject.backend.rest.dtos;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 public class DeliverTicketDto {
-	private Long credit_card;
+	private String creditcard;
 	private Long code;
 
 	public DeliverTicketDto() {
 	}
 
-	public DeliverTicketDto(Long credit_card, Long code) {
-		this.credit_card = credit_card;
+	public DeliverTicketDto(String creditcard, Long code) {
+		this.creditcard = creditcard;
 		this.code = code;
 	}
 
 	@NotNull
-	public Long getCredit_card() {
-		return credit_card;
+	@Length(min=16,max=16)
+	public String getCreditcard() {
+		return creditcard;
 	}
 
-	public void setCredit_card(Long credit_card) {
-		this.credit_card = credit_card;
+	public void setCreditcard(String creditcard) {
+		this.creditcard = creditcard;
 	}
 
 	@NotNull

@@ -82,7 +82,7 @@ CREATE TABLE Book(
     id BIGINT NOT NULL AUTO_INCREMENT,
     tickets INT NOT NULL,
     movieSessionId BIGINT NOT NULL,
-    credit_card BIGINT NOT NULL,
+    creditcard CHAR(16) NOT NULL,
     userId BIGINT NOT NULL,
     date DATETIME NOT NULL,
     withdraw BOOLEAN NOT NULL,

@@ -9,6 +9,8 @@ public class BookDto {
 	private int tickets;
 	private double prize;
 	private LocalDateTime dateMovieSession;
+	
+	public BookDto() {}
 
 	public BookDto(LocalDateTime dateBook, String movieTitle, int tickets, double prize,
 			LocalDateTime dateMovieSession) {

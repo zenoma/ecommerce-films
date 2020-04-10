@@ -8,10 +8,10 @@ import es.udc.paproject.backend.model.exceptions.MovieSessionAlreadyStartedExcep
 import es.udc.paproject.backend.model.exceptions.NotEnoughtSeatsException;
 
 public interface BookingService {
-    Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
+    Long bookTicket(int seats, String creditCard, Long sessionId, Long userId)
 	    throws InstanceNotFoundException, NotEnoughtSeatsException, MovieSessionAlreadyStartedException;
 
-    void deliverTicket(Long creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException;
+    void deliverTicket(String creditCard, Long code) throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException;
 
     Block<Book> getBookRecord(Long userId, int page, int size) throws InstanceNotFoundException;
 

@@ -15,7 +15,7 @@ public class BookConversor {
 	}
 
 	public final static BookParamsDto toBookParamsDto(Book book) {
-		return new BookParamsDto(book.getTickets(), book.getMovieSession().getId(), book.getCredit_card());
+		return new BookParamsDto(book.getTickets(), book.getMovieSession().getId(), book.getCreditcard());
 	}
 
 	public final static List<BookDto> toBookDtos(List<Book> books) {
@@ -24,6 +24,6 @@ public class BookConversor {
 
 	public final static BookDto toBookDto(Book book) {
 		return new BookDto(book.getDate(), book.getMovieSession().getMovie().getTitle(), book.getTickets(),
-				book.getTickets() * book.getMovieSession().getPrice(), book.getMovieSession().getDate());
+				book.getTickets() * book.getMovieSession().getPrice().doubleValue(), book.getMovieSession().getDate());
 	}
 }

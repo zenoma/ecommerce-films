@@ -7,7 +7,7 @@ public class CinemaDto {
 
 	public CinemaDto(Long id, String name) {
 		this.id=id;
-		this.name=name != null ? name.trim() : null;;
+		this.name=name;
 	}
 
 	public Long getId() {

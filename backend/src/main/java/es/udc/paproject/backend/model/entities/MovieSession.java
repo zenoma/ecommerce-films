@@ -1,5 +1,6 @@
 package es.udc.paproject.backend.model.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -17,14 +18,14 @@ public class MovieSession {
 	private Long id;
 	private Movie movie;
 	private Room room;
-	private double price;
+	private BigDecimal price;
 	private int seats;
 	private LocalDateTime date;
 	private Long version;
 	
 	public MovieSession() {}
 	
-	public MovieSession(Movie movie, Room room, double price, LocalDateTime date) {
+	public MovieSession(Movie movie, Room room, BigDecimal price, LocalDateTime date) {
 		this.movie=movie;
 		this.room=room;
 		this.price=price;
@@ -63,11 +64,11 @@ public class MovieSession {
 		this.room = room;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

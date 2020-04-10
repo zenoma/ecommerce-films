@@ -4,7 +4,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import es.udc.paproject.backend.model.entities.MovieSession;
+import org.hibernate.validator.constraints.Length;
 
 public class BookParamsDto {
 
@@ -16,12 +16,12 @@ public class BookParamsDto {
 
 	private int tickets;
 	private Long movieSessionId;
-	private Long credit_card;
+	private String creditcard;
 
-	public BookParamsDto(int tickets, Long movieSessionId, Long credit_card) {
+	public BookParamsDto(int tickets, Long movieSessionId, String creditcard) {
 		this.tickets = tickets;
 		this.movieSessionId = movieSessionId;
-		this.credit_card = credit_card;
+		this.creditcard = creditcard;
 	}
 
 	@NotNull
@@ -45,12 +45,13 @@ public class BookParamsDto {
 	}
 
 	@NotNull
-	public Long getCredit_card() {
-		return credit_card;
+	@Length(min=16,max=16)
+	public String getCreditcard() {
+		return creditcard;
 	}
 
-	public void setCredit_card(Long credit_card) {
-		this.credit_card = credit_card;
+	public void setCreditcard(String creditcard) {
+		this.creditcard = creditcard;
 	}
 
 }

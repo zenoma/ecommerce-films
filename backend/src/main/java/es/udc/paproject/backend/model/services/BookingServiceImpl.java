@@ -34,7 +34,7 @@ public class BookingServiceImpl implements BookingService {
     private BookDao bookDao;
 
     @Override
-    public Long bookTicket(int seats, Long creditCard, Long sessionId, Long userId)
+    public Long bookTicket(int seats, String creditCard, Long sessionId, Long userId)
 	    throws InstanceNotFoundException, NotEnoughtSeatsException, MovieSessionAlreadyStartedException {
 		User user = permissionChecker.checkUser(userId);
 		
@@ -59,13 +59,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void deliverTicket(Long creditCard, Long bookId)
+    public void deliverTicket(String creditCard, Long bookId)
 	    throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException, MovieSessionAlreadyStartedException {
     	Book book = checkBookByCode(bookId);
     	if(book.getMovieSession().getDate().isBefore(LocalDateTime.now())) {
     		throw new MovieSessionAlreadyStartedException(book.getMovieSession().getId());
     	}
-		if (!book.getCredit_card().equals(creditCard)) {
+		if (!book.getCreditcard().equals(creditCard)) {
 			throw new CodeAndCreditCardNotMatchException(bookId, creditCard);
 		}
 		if (book.isWithdraw()) {

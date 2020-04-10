@@ -2,6 +2,7 @@ package es.udc.paproject.backend.test.model.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -120,7 +121,7 @@ public class MovieServiceTest {
 				for(int j=0;j<24; j+=HOUR_BETWEEN_SESSION) {
 					int minutes=30;
 					if(j%2!=0) minutes=55;
-					MovieSession movieSession=new MovieSession(movie, room, 8.20, LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
+					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
 					movieSession=movieSessionDao.save(movieSession);
 					movieSessions.add(movieSession);
 				}
