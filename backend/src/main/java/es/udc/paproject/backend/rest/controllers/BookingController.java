@@ -55,7 +55,7 @@ public class BookingController {
 	@ResponseBody
 	public ErrorsDto handleNotEnoughtSeatsException(NotEnoughtSeatsException exception, Locale locale) {
 
-		String errorMessage = messageSource.getMessage(NOT_ENOUGH_SEATS_EXCEPTION_CODE, null,
+		String errorMessage = messageSource.getMessage(NOT_ENOUGH_SEATS_EXCEPTION_CODE, new Object[] {exception.getSessionId(),exception.getSeatsLeft()},
 				NOT_ENOUGH_SEATS_EXCEPTION_CODE, locale);
 
 		return new ErrorsDto(errorMessage);

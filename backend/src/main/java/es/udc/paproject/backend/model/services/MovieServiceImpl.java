@@ -47,7 +47,7 @@ public class MovieServiceImpl implements MovieService {
 	public Set<ListingItem> getListing(Long cinemaId, LocalDate date)
 			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		LocalDateTime startDate=LocalDateTime.of(date, LocalTime.now()).withNano(0);
-		LocalDateTime endDate=LocalDateTime.of(date, LocalTime.of(23,  59)).withNano(0);
+		LocalDateTime endDate=LocalDateTime.of(date, LocalTime.of(23, 59)).withNano(0);
 		LocalDateTime limitWeek=LocalDateTime.now().plusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
 		Set<ListingItem> listingItems=new HashSet<>();
 		
@@ -61,20 +61,24 @@ public class MovieServiceImpl implements MovieService {
 		if (endDate.isAfter(limitWeek))
 			throw new PlusWeekDateException();
 
+		if (!date.equals(LocalDate.now())) {
+			startDate = LocalDateTime.of(date, LocalTime.of(0, 0)).withNano(0);
+		}
 		Set<MovieSession> movieSessionList=movieSessionDao.findByRoomCinemaIdAndDateBetweenOrderByMovieTitleDescDateAsc(cinemaId, startDate, endDate);
 		
 		Movie movie=new Movie();
 		List<MovieSession> movieSessions=new ArrayList<>();
 
 		for(MovieSession movieSession:movieSessionList) {
-			movieSessions.add(movieSession);
 			if(movie.getId()!=null && movie.getId()!=movieSession.getMovie().getId()){
 				listingItems.add(new ListingItem(movie, movieSessions));
-				movieSessions.clear();
+				movieSessions = new ArrayList<>();
 			}
+			movieSessions.add(movieSession);
 			movie=movieSession.getMovie();
 		}
-		
+		if (movieSessions.size() > 0) {
+		listingItems.add(new ListingItem(movie, movieSessions));}
 		return listingItems;
 	}
 
@@ -88,7 +92,7 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public Set<Cinema> getCinemasByCityId(Long cityId) throws InstanceNotFoundException {
 		City city = checkCity(cityId);
-		return cinemaDao.findByCityIdOrderByNameDesc(city.getId());
+		return cinemaDao.findByCityIdOrderByName(city.getId());
 	}
 
 	@Override

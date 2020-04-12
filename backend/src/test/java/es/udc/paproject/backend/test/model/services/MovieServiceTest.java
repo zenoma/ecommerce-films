@@ -37,11 +37,11 @@ import es.udc.paproject.backend.model.services.MovieService;
 @ActiveProfiles("test")
 @Transactional
 public class MovieServiceTest {
-	private static final String[] MOVIE_TITLES= {"Avengers: Endgame", "Avatar", "Star Wars: El despertar de la fuerza", "Titanic", "Jurassic World", "Frozen", "Toy Story 4", "El Rey León", "Fast & Furious 7", "Los Increíbles 2"};
-	private static final String[] CITY_NAMES= {"A Coruña", "Pontevedra", "Lugo"};
+	private static final String[] MOVIE_TITLES= {"Avengers: Endgame", "Avatar", "Star Wars: El despertar de la fuerza"};
+	private static final String[] CITY_NAMES= {"A Coruña", "Pontevedra"};
 	private static final String[] CINEMA_NAMES= {"Cinesa", "Yelmo", "Galicine"};
-	private static final int NUM_MAX_ROOMS_BY_CINEMA=5;
-	private static final int HOUR_BETWEEN_SESSION=3;
+	private static final int NUM_MAX_ROOMS_BY_CINEMA=1;
+	private static final int HOUR_BETWEEN_SESSION=12;
 	private static final int DAYS_WITH_MOVIES=8;
 	
 	private List<City> cities=new ArrayList<>();

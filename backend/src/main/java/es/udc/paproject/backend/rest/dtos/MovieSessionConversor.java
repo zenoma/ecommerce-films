@@ -21,6 +21,6 @@ public class MovieSessionConversor {
 	}
 	
 	public final static MovieSessionListingDto toMovieSessionListingDto(MovieSession movieSession) {
-		return new MovieSessionListingDto(movieSession.getMovie().getId(), LocalTime.of(movieSession.getDate().getHour(), movieSession.getDate().getMinute()));
+		return new MovieSessionListingDto(movieSession.getId(), LocalTime.of(movieSession.getDate().getHour(), movieSession.getDate().getMinute()));
 	}
 }

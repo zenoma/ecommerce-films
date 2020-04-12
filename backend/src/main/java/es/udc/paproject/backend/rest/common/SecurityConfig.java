@@ -28,14 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/users/signUp").permitAll()
 			.antMatchers("/users/login").permitAll()
 			.antMatchers("/users/loginFromServiceToken").permitAll()
-			.antMatchers("/users/?").hasAnyRole()
-			.antMatchers("/users/?/changePassword").hasAnyRole()
+			.antMatchers("/users/?").hasAnyRole("USER","TICKETSELLER")
+			.antMatchers("/users/?/changePassword").hasAnyRole("USER","TICKETSELLER")
 			.antMatchers("/movie/cities").permitAll()
 			.antMatchers("/movie/cinemas/{cityId}").permitAll()
 			.antMatchers("/movie/{movieId}").permitAll()
 			.antMatchers("/movie/listing").permitAll()
 			.antMatchers("/movie/movieSession/{movieSessionId}").permitAll()
-			.antMatchers("/book/deliverticket").hasRole("TICKETSELLER")
+			.antMatchers("/booking/books/deliver").hasRole("TICKETSELLER")
 			.anyRequest().hasRole("USER");
 
 	}

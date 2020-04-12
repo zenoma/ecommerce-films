@@ -47,7 +47,7 @@ public class BookingServiceImpl implements BookingService {
 		    throw new NotEnoughtSeatsException(sessionId, session.getSeats());
 		}
 	
-		session.setSeats(session.getSeats() + seats);
+		session.setSeats(session.getSeats() - seats);
 	
 		sessionDao.save(session);
 	

@@ -44,7 +44,7 @@ public class MovieSession {
 		this.id = id;
 	}
 	
-	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@ManyToOne(optional=true)
 	@JoinColumn(name="movieId")
 	public Movie getMovie() {
 		return movie;
