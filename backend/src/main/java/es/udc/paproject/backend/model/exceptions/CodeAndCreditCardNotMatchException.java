@@ -4,9 +4,9 @@ package es.udc.paproject.backend.model.exceptions;
 public class CodeAndCreditCardNotMatchException extends Exception {
 
     private Long code;
-    private Long creditCard;
+    private String creditCard;
 
-    public CodeAndCreditCardNotMatchException(Long code, Long creditCard) {
+    public CodeAndCreditCardNotMatchException(Long code, String creditCard) {
 		this.code = code;
 		this.creditCard = creditCard;
     }
@@ -15,7 +15,7 @@ public class CodeAndCreditCardNotMatchException extends Exception {
     	return code;
     }
 
-    public final Long getCreditCard() {
+    public final String getCreditCard() {
     	return creditCard;
     }
 }

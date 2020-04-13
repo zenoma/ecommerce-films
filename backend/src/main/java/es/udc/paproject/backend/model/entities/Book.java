@@ -15,7 +15,7 @@ public class Book {
     private Long id;
     private int tickets;
     private MovieSession movieSession;
-    private Long credit_card;
+    private String creditcard;
     private User user;
     private LocalDateTime date;
     private boolean withdraw;
@@ -23,17 +23,17 @@ public class Book {
     public Book() {
     }
 
-    public Book(int tickets, MovieSession movieSession, Long credit_card, User user, LocalDateTime date,
+    public Book(int tickets, MovieSession movieSession, String creditcard, User user, LocalDateTime date,
 	    boolean withdraw) {
 		this.tickets = tickets;
 		this.movieSession = movieSession;
-		this.credit_card = credit_card;
+		this.creditcard = creditcard;
 		this.user = user;
 		this.date = date;
 		this.withdraw = withdraw;
     }
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
     	return id;
@@ -61,12 +61,12 @@ public class Book {
     	this.movieSession = movieSession;
     }
 
-    public Long getCredit_card() {
-    	return credit_card;
+    public String getCreditcard() {
+    	return creditcard;
     }
 
-    public void setCredit_card(Long credit_card) {
-    	this.credit_card = credit_card;
+    public void setCreditcard(String creditcard) {
+    	this.creditcard = creditcard;
     }
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
@@ -94,60 +94,4 @@ public class Book {
     public void setWithdraw(boolean withdraw) {
     	this.withdraw = withdraw;
     }
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((credit_card == null) ? 0 : credit_card.hashCode());
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((movieSession == null) ? 0 : movieSession.hashCode());
-		result = prime * result + tickets;
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + (withdraw ? 1231 : 1237);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Book other = (Book) obj;
-		if (credit_card == null) {
-			if (other.credit_card != null)
-				return false;
-		} else if (!credit_card.equals(other.credit_card))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (movieSession == null) {
-			if (other.movieSession != null)
-				return false;
-		} else if (!movieSession.equals(other.movieSession))
-			return false;
-		if (tickets != other.tickets)
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		if (withdraw != other.withdraw)
-			return false;
-		return true;
-	}
-
 }

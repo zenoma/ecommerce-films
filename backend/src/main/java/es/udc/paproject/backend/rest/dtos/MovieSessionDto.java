@@ -1,56 +1,57 @@
 package es.udc.paproject.backend.rest.dtos;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class MovieSessionDto {
-	private Long id;
-	private MovieDto movie;
-	private RoomDto room;
-	private double price;
+	private String movieTitle;
+	private int movieDuration;
+	private String roomName;
+	private BigDecimal price;
 	private int seats;
 	private LocalDateTime date;
 
 	public MovieSessionDto() {
 	}
-
-	public MovieSessionDto(Long id, MovieDto movie, RoomDto room, double price, int seats, LocalDateTime date) {
-		this.id = id;
-		this.movie = movie;
-		this.room = room;
+	
+	public MovieSessionDto(String movieTitle, int movieDuration, String roomName, BigDecimal price, int seats, LocalDateTime date) {
+		this.movieTitle = movieTitle;
+		this.movieDuration = movieDuration;
+		this.roomName = roomName;
 		this.price = price;
 		this.seats = seats;
 		this.date = date;
 	}
 
-	public Long getId() {
-		return id;
+	public String getMovieTitle() {
+		return movieTitle;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 
-	public MovieDto getMovie() {
-		return movie;
+	public int getMovieDuration() {
+		return movieDuration;
 	}
 
-	public void setMovie(MovieDto movie) {
-		this.movie = movie;
+	public void setMovieDuration(int movieDuration) {
+		this.movieDuration = movieDuration;
 	}
 
-	public RoomDto getRoom() {
-		return room;
+	public String getRoomName() {
+		return roomName;
 	}
 
-	public void setRoom(RoomDto room) {
-		this.room = room;
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

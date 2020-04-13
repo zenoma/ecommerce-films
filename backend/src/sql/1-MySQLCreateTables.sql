@@ -70,6 +70,7 @@ CREATE TABLE MovieSession(
     price DECIMAL(11, 2) NOT NULL,
 	seats SMALLINT NOT NULL,
     date DATETIME NOT NULL,
+    version BIGINT NOT NULL DEFAULT 0,
 	CONSTRAINT SessionPK PRIMARY KEY (id),
 	CONSTRAINT MovieSessionFK FOREIGN KEY (movieId) 
         REFERENCES Movie (id),
@@ -81,7 +82,7 @@ CREATE TABLE Book(
     id BIGINT NOT NULL AUTO_INCREMENT,
     tickets INT NOT NULL,
     movieSessionId BIGINT NOT NULL,
-    credit_card BIGINT NOT NULL,
+    creditcard CHAR(16) NOT NULL,
     userId BIGINT NOT NULL,
     date DATETIME NOT NULL,
     withdraw BOOLEAN NOT NULL,

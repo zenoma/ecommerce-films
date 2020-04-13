@@ -1,8 +1,10 @@
 package es.udc.paproject.backend.rest.dtos;
 
+import java.time.LocalTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import es.udc.paproject.backend.model.entities.MovieSession;
-import static es.udc.paproject.backend.rest.dtos.MovieConversor.toMovieDto;
-import static es.udc.paproject.backend.rest.dtos.RoomConversor.toRoomDto;
 
 public class MovieSessionConversor {
 
@@ -10,11 +12,15 @@ public class MovieSessionConversor {
 	}
 
 	public final static MovieSessionDto toMovieSessionDto(MovieSession movieSession) {
-		MovieDto movie = toMovieDto(movieSession.getMovie());
-		RoomDto room = toRoomDto(movieSession.getRoom());
-
-		return new MovieSessionDto(movieSession.getId(), movie, room, movieSession.getPrice(), movieSession.getSeats(),
-				movieSession.getDate());
+		return new MovieSessionDto(movieSession.getMovie().getTitle(), movieSession.getMovie().getDuration(), movieSession.getRoom().getName(),
+				movieSession.getPrice(), movieSession.getSeats(), movieSession.getDate());
 	}
 
+	public final static List<MovieSessionListingDto> toMovieSessionListingDtos(List<MovieSession> movieSessions) {
+		return movieSessions.stream().map(movieSession -> toMovieSessionListingDto(movieSession)).collect(Collectors.toList());
+	}
+	
+	public final static MovieSessionListingDto toMovieSessionListingDto(MovieSession movieSession) {
+		return new MovieSessionListingDto(movieSession.getId(), LocalTime.of(movieSession.getDate().getHour(), movieSession.getDate().getMinute()));
+	}
 }

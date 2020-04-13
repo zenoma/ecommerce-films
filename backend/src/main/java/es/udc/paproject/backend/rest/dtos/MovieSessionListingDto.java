@@ -1,23 +1,17 @@
 package es.udc.paproject.backend.rest.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class MovieSessionListingDto {
 	private Long id;
-	private RoomDto room;
-	private double price;
-	private int seats;
-	private LocalDateTime date;
+	private LocalTime hour;
 
 	public MovieSessionListingDto() {
 	}
 
-	public MovieSessionListingDto(Long id, RoomDto room, double price, int seats, LocalDateTime date) {
+	public MovieSessionListingDto(Long id, LocalTime hour) {
 		this.id = id;
-		this.room = room;
-		this.price = price;
-		this.seats = seats;
-		this.date = date;
+		this.hour = hour;
 	}
 
 	public Long getId() {
@@ -28,35 +22,11 @@ public class MovieSessionListingDto {
 		this.id = id;
 	}
 
-	public RoomDto getRoom() {
-		return room;
+	public LocalTime getHour() {
+		return hour;
 	}
 
-	public void setRoom(RoomDto room) {
-		this.room = room;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public int getSeats() {
-		return seats;
-	}
-
-	public void setSeats(int seats) {
-		this.seats = seats;
-	}
-
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setHour(LocalTime hour) {
+		this.hour = hour;
 	}
 }
