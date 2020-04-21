@@ -1,0 +1,1 @@
+export const GET_LISTING_COMPLETED = "/project/movie/getListingCompleted";

@@ -6,16 +6,19 @@ import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 import users from '../../users';
+import movies from '../../movies';
 
 const App = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-
+        
         dispatch(users.actions.tryLoginFromServiceToken(
             () => dispatch(users.actions.logout())));
-    
+        
+        dispatch(movies.actions.getListing(1, null));
+          
     });
 
     return (

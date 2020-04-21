@@ -34,6 +34,10 @@ export default {
     'project.users.Login.title': 'Login',
     'project.users.SignUp.fields.confirmPassword': 'Confirm password',
     'project.users.SignUp.title': 'Sign up',
-    'project.users.UpdateProfile.title': 'Update profile'
+    'project.users.UpdateProfile.title': 'Update profile',
+
+    'project.global.fields.movieTitle' : 'Title',
+    'project.global.fields.movieSessions' : 'Sessions',
+    'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .'
 
 }
