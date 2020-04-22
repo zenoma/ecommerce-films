@@ -39,6 +39,8 @@ export default {
 
     'project.global.fields.movieTitle' : 'Título',
     'project.global.fields.movieSessions' : 'Sesiones',
-    'project.global.fields.listingItemsEmpty' : 'No hay películas en la fecha seleccionada.'
+    'project.global.fields.listingItemsEmpty' : 'No hay películas en la fecha seleccionada.',
+
+    'project.movies.CitySelector.selectCities': 'Selecciona una ciudad'
 
 }

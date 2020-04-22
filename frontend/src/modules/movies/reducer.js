@@ -4,7 +4,8 @@ import {combineReducers} from 'redux';
 
 const initialState = {
     movies: null,
-    listingDate: null
+    listingDate: null,
+    cities: null
 };
 
 const movies = (state = initialState.movies, action) => {
@@ -25,9 +26,19 @@ const listingDate = (state = initialState.listingDate, action) => {
     }
 }
 
+const cities = (state = initialState.cities, action) => {
+    switch(action.type) {
+        case actionTypes.GET_CITIES_COMPLETED:
+            return action.cities;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     movies,
-    listingDate
+    listingDate,
+    cities
 });
 
 export default reducer;

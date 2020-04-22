@@ -18,6 +18,7 @@ const App = () => {
             () => dispatch(users.actions.logout())));
         
         dispatch(movies.actions.getListing(1, null));
+        dispatch(movies.actions.getCities());
           
     });
 

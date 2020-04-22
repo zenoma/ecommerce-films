@@ -38,6 +38,7 @@ export default {
 
     'project.global.fields.movieTitle' : 'Title',
     'project.global.fields.movieSessions' : 'Sessions',
-    'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .'
-
+    'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .',
+    
+    'project.movies.CitySelector.selectCities': 'Select a city'
 }

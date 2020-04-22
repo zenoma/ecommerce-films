@@ -14,3 +14,14 @@ export const getListing = (cinemaId, listingDate) => dispatch => {
     backend.movieService.getListing(cinemaId, listingDate,
         response => dispatch(getListingCompleted(response, listingDate)))
 }
+
+const getCitiesCompleted = (cities) => ({
+    type: actionTypes.GET_CITIES_COMPLETED,
+    cities
+})
+
+export const getCities = () => dispatch => {
+    backend.movieService.getCities(response => {
+        dispatch(getCitiesCompleted(response))
+    });
+}
