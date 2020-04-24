@@ -41,5 +41,6 @@ export default {
     'project.global.fields.movieSessions' : 'Sesións',
     'project.global.fields.listingItemsEmpty' : 'Non hai películas na data selecionada.',
 
-    'project.movies.CitySelector.selectCities': 'Seleciona unha cidade'
+    'project.movies.CitySelector.selectCities': 'Seleciona unha cidade',
+    'project.movies.CinemaSelector.selectCinemas': 'Seleciona un cine'
 }

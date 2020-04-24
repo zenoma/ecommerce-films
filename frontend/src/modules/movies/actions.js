@@ -2,17 +2,19 @@ import * as actionTypes from './actionTypes';
 import common from '../common';
 import backend from '../../backend';
 
-const getListingCompleted = (movies, date) => ({
+const getListingCompleted = (movies, date, selectedCinema) => ({
     type: actionTypes.GET_LISTING_COMPLETED,
-    movies, date
+    movies, date, selectedCinema
 });
 
 export const getListing = (cinemaId, listingDate) => dispatch => {
     if(listingDate==null){
         listingDate=common.dateUtils.formatDate(new Date());
     }
-    backend.movieService.getListing(cinemaId, listingDate,
-        response => dispatch(getListingCompleted(response, listingDate)))
+    if(cinemaId != null){
+        backend.movieService.getListing(cinemaId, listingDate, 
+            response => dispatch(getListingCompleted(response, listingDate, cinemaId)))
+    }
 }
 
 const getCitiesCompleted = (cities) => ({
@@ -21,7 +23,28 @@ const getCitiesCompleted = (cities) => ({
 })
 
 export const getCities = () => dispatch => {
-    backend.movieService.getCities(response => {
+    backend.movieService.getCities(response => {console.log(response);
         dispatch(getCitiesCompleted(response))
     });
 }
+
+export const getCinemasCompleted = (cinemas) => ({
+    type : actionTypes.GET_CINEMAS_COMPLETED,
+    cinemas
+});
+
+export const getCinemas = (city) => dispatch => {
+    dispatch(clearSelectedCinema());
+    dispatch(clearMovies());
+    backend.movieService.getCinemas(city, response => {
+        dispatch(getCinemasCompleted(response))
+    })
+};
+
+const clearSelectedCinema = () =>({
+    type: actionTypes.CLEAR_SELECTED_CINEMA
+});
+
+const clearMovies = () =>({
+    type: actionTypes.CLEAR_MOVIES
+});

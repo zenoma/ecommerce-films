@@ -5,13 +5,17 @@ import {combineReducers} from 'redux';
 const initialState = {
     movies: null,
     listingDate: null,
-    cities: null
+    cities: null, 
+    cinemas: null,
+    selectedCinema: null
 };
 
 const movies = (state = initialState.movies, action) => {
     switch (action.type) {
         case actionTypes.GET_LISTING_COMPLETED:
-            return action.movies;
+            return action.movies.length > 0 ? action.movies : initialState.movies;
+        case actionTypes.CLEAR_MOVIES:
+            return initialState.movies;
         default:
             return state;
     }
@@ -26,6 +30,17 @@ const listingDate = (state = initialState.listingDate, action) => {
     }
 }
 
+const selectedCinema = (state = initialState.selectedCinema, action) => {
+    switch(action.type) {
+        case actionTypes.GET_LISTING_COMPLETED:
+            return action.selectedCinema;
+        case actionTypes.CLEAR_SELECTED_CINEMA:
+            return initialState.selectedCinema;
+        default:
+            return state;
+    }
+}
+
 const cities = (state = initialState.cities, action) => {
     switch(action.type) {
         case actionTypes.GET_CITIES_COMPLETED:
@@ -35,10 +50,21 @@ const cities = (state = initialState.cities, action) => {
     }
 }
 
+const cinemas = (state = initialState.cinemas, action) => {
+    switch(action.type){
+        case actionTypes.GET_CINEMAS_COMPLETED:
+            return action.cinemas;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     movies,
     listingDate,
-    cities
+    selectedCinema,
+    cities, 
+    cinemas
 });
 
 export default reducer;

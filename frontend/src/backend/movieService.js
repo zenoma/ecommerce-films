@@ -7,3 +7,7 @@ export const getListing = (cinemaId, date, onSuccess) => {
 export const getCities = (onSuccess) => {
     appFetch(`/movie/cities`, config('GET'), onSuccess);
 }
+
+export const getCinemas = (cityId, onSuccess) => {
+    appFetch(`/movie/cinemas?cityId=${cityId}`, config('GET'), onSuccess);
+}
