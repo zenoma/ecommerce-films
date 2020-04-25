@@ -1,4 +1,4 @@
-a, a:hover{
+span.badge a, span.badge a:hover{
     text-decoration: none;
     color: #FFF;
 }

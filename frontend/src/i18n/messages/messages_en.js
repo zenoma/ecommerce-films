@@ -45,9 +45,10 @@ export default {
     'project.movies.CinemaSelector.selectCinemas': 'Select a cinema',
     'project.movies.DateSelector.selectDate': 'Select a date',
 
-    'project.movies.moviesession.duration': 'Duration(min)',
-    'project.movies.moviesession.price': 'Price',
-    'project.movies.moviesession.date': 'Date',
-    'project.movies.moviesession.room': 'Room',
-    'project.movies.moviesession.capacity': 'Capacity'
+    'project.movies.fields.duration': 'Duration(min)',
+    'project.movies.fields.price': 'Price',
+    'project.movies.fields.date': 'Date',
+    'project.movies.fields.room': 'Room',
+    'project.movies.fields.capacity': 'Capacity',
+    'project.movies.fields.synopsis': 'Synopsis'
 }

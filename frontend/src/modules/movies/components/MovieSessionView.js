@@ -36,31 +36,31 @@ const MovieSessionVIew = () =>{
             <div className="row">
                 <div className="col-12 col-md-6">
                     <div className="info mb-2">
-                        <FormattedMessage id='project.movies.moviesession.duration'>
+                        <FormattedMessage id='project.movies.fields.duration'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                         {session.movieDuration}
                     </div>
                     <div className="info mb-2">
-                        <FormattedMessage id='project.movies.moviesession.price'>
+                        <FormattedMessage id='project.movies.fields.price'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                         {session.price} €
                     </div>
                     <div className="info mb-2">
-                        <FormattedMessage id='project.movies.moviesession.date'>
+                        <FormattedMessage id='project.movies.fields.date'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                         {common.dateUtils.formatDateTime(session.date)}
                     </div>
                     <div className="info mb-2">
-                        <FormattedMessage id='project.movies.moviesession.room'>
+                        <FormattedMessage id='project.movies.fields.room'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                         {session.roomName}
                     </div>
                     <div className="info mb-2">
-                        <FormattedMessage id='project.movies.moviesession.capacity'>
+                        <FormattedMessage id='project.movies.fields.capacity'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                          {session.seats}

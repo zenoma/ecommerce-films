@@ -74,3 +74,8 @@ export const getMovieById = id => dispatch =>{
 const clearMovieSession = () =>({
     type: actionTypes.CLEAR_MOVIESESSION
 });
+
+
+export const clearMovieDetails = () => ({
+    type: actionTypes.CLEAR_MOVIE_DETAILS
+});

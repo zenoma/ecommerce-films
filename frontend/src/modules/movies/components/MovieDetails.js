@@ -3,7 +3,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {useParams} from 'react-router-dom';
 
-import users from '../../users';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
 import BackLink from '../../common/components/BackLink';
@@ -23,7 +22,7 @@ const MovieDetails = () =>{
             dispatch(actions.getMovieById(movieId));
         }
 
-        // return () => dispatch(actions.clearProduct());
+        return () => dispatch(actions.clearMovieDetails());
 
     }, [id, dispatch]);
 
@@ -36,11 +35,19 @@ const MovieDetails = () =>{
 
         <div>
             <BackLink/>
-            <h1 >
+            <h1 className="mb-5 text-center">
                 {movie.title}
             </h1>
-            <div>
-                {movie.duration}
+            <div className="info mb-2">
+                <FormattedMessage id='project.movies.fields.duration'>
+                    {message => (<strong>{message}: </strong>)}
+                </FormattedMessage>
+            {movie.duration}
+            </div>
+            <div className="info">
+                <FormattedMessage id='project.movies.fields.synopsis'>
+                    {message => (<strong>{message}: </strong>)}
+                </FormattedMessage>
             </div>
             <div>
                 {movie.synopsis}

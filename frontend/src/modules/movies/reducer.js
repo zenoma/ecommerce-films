@@ -65,8 +65,13 @@ const movie = (state = initialState.movie, action) => {
     switch (action.type) {
         case actionTypes.FIND_MOVIE_BY_ID:
             return action.movie; 
+        case actionTypes.CLEAR_MOVIE_DETAILS:
+            return initialState.movie;
+        default:
+            return state;
     }
 }
+    
 
 const movieSession = (state = initialState.movieSession, action) => {
     switch(action.type){
