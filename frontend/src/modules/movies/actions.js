@@ -23,12 +23,12 @@ const getCitiesCompleted = (cities) => ({
 })
 
 export const getCities = () => dispatch => {
-    backend.movieService.getCities(response => {console.log(response);
+    backend.movieService.getCities(response => {
         dispatch(getCitiesCompleted(response))
     });
 }
 
-export const getCinemasCompleted = (cinemas) => ({
+const getCinemasCompleted = (cinemas) => ({
     type : actionTypes.GET_CINEMAS_COMPLETED,
     cinemas
 });
@@ -41,10 +41,26 @@ export const getCinemas = (city) => dispatch => {
     })
 };
 
+const getMovieSessionCompleted = (movieSession) => ({
+    type: actionTypes.GET_MOVIESESSION_COMPLETED,
+    movieSession
+});
+
+export const getMovieSession = (id) => dispatch => {
+    dispatch(clearMovieSession());
+    backend.movieService.getMovieSession(id, response => {
+        dispatch(getMovieSessionCompleted(response))
+    });
+}
+
 const clearSelectedCinema = () =>({
     type: actionTypes.CLEAR_SELECTED_CINEMA
 });
 
 const clearMovies = () =>({
     type: actionTypes.CLEAR_MOVIES
+});
+
+const clearMovieSession = () =>({
+    type: actionTypes.CLEAR_MOVIESESSION
 });
