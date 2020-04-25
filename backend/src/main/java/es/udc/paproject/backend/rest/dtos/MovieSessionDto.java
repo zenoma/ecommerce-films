@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class MovieSessionDto {
 	private String movieTitle;
 	private int movieDuration;
+	private String cinemaName;
 	private String roomName;
 	private BigDecimal price;
 	private int seats;
@@ -14,9 +15,10 @@ public class MovieSessionDto {
 	public MovieSessionDto() {
 	}
 	
-	public MovieSessionDto(String movieTitle, int movieDuration, String roomName, BigDecimal price, int seats, LocalDateTime date) {
+	public MovieSessionDto(String movieTitle, int movieDuration, String cinemaName, String roomName, BigDecimal price, int seats, LocalDateTime date) {
 		this.movieTitle = movieTitle;
 		this.movieDuration = movieDuration;
+		this.cinemaName = cinemaName;
 		this.roomName = roomName;
 		this.price = price;
 		this.seats = seats;
@@ -37,6 +39,14 @@ public class MovieSessionDto {
 
 	public void setMovieDuration(int movieDuration) {
 		this.movieDuration = movieDuration;
+	}
+
+	public String getCinemaName() {
+		return cinemaName;
+	}
+
+	public void setCinemaName(String cinemaName) {
+		this.cinemaName = cinemaName;
 	}
 
 	public String getRoomName() {

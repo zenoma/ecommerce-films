@@ -48,6 +48,7 @@ export default {
     'project.movies.fields.duration': 'Duration(min)',
     'project.movies.fields.price': 'Price',
     'project.movies.fields.date': 'Date',
+    'project.movies.fields.cinema': 'Cinema',
     'project.movies.fields.room': 'Room',
     'project.movies.fields.capacity': 'Capacity',
     'project.movies.fields.synopsis': 'Synopsis'

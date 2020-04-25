@@ -12,7 +12,7 @@ public class MovieSessionConversor {
 	}
 
 	public final static MovieSessionDto toMovieSessionDto(MovieSession movieSession) {
-		return new MovieSessionDto(movieSession.getMovie().getTitle(), movieSession.getMovie().getDuration(), movieSession.getRoom().getName(),
+		return new MovieSessionDto(movieSession.getMovie().getTitle(), movieSession.getMovie().getDuration(), movieSession.getRoom().getCinema().getName(), movieSession.getRoom().getName(),
 				movieSession.getPrice(), movieSession.getSeats(), movieSession.getDate());
 	}
 

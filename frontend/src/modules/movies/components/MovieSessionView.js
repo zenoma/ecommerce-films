@@ -54,6 +54,12 @@ const MovieSessionVIew = () =>{
                         {common.dateUtils.formatDateTime(session.date)}
                     </div>
                     <div className="info mb-2">
+                        <FormattedMessage id='project.movies.fields.cinema'>
+                            {message => (<strong>{message}: </strong>)}
+                        </FormattedMessage>
+                        {session.cinemaName}
+                    </div>
+                    <div className="info mb-2">
                         <FormattedMessage id='project.movies.fields.room'>
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>

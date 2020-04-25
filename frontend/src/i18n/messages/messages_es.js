@@ -48,6 +48,7 @@ export default {
     'project.movies.fields.duration': 'Duración(min)',
     'project.movies.fields.price': 'Precio',
     'project.movies.fields.date': 'Fecha',
+    'project.movies.fields.cinema': 'Cine',
     'project.movies.fields.room': 'Sala',
     'project.movies.fields.capacity': 'Capacidad',
     'project.movies.fields.synopsis': 'Resumen'
