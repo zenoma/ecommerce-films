@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const Sessions = (movieSessions) => (
         <span>
             {movieSessions.sessions.map(session => 
-                <div key = {session.id}> 
+                <span className="badge badge-primary mr-2" key = {session.id}> 
                     {session.hour} {/*Cambiar por link*/}
-                </div>
+                </span>
             )}
         </span>
 )

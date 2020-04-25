@@ -15,9 +15,9 @@ const Movies = (listingItems) => {
     if (listingItems.movies != null){
         contentBody = 
             listingItems.movies.map(movie => 
-                <tr key={movie.movieId}>
-                    <td>{movie.movieTitle}</td>
-                    <td><Sessions sessions={movie.movieSessions}/> </td>
+                <tr className="d-flex" key={movie.movieId}>
+                    <td className="col-6">{movie.movieTitle}</td>
+                    <td className="col-6"><Sessions sessions={movie.movieSessions}/> </td>
                 </tr>
             )
     };
@@ -26,11 +26,11 @@ const Movies = (listingItems) => {
         <table className="table table-striped table-hover">
 
             <thead>
-                <tr>
-                    <th scope="col">
+                <tr className="d-flex">
+                    <th className="col-6">
                         <FormattedMessage id='project.global.fields.movieTitle'/>
                     </th>
-                    <th scope="col">
+                    <th className="col-6">
                         <FormattedMessage id='project.global.fields.movieSessions'/>
                     </th>
                 </tr>

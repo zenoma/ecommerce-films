@@ -11,7 +11,7 @@ const CitySelector = (selectProps) => {
     return(
         <select {...selectProps}>
             <FormattedMessage id='project.movies.CitySelector.selectCities'>
-                {message => (<option value="" >{message}</option>)}
+                {message => (<option value={0} disabled>{message}</option>)}
             </FormattedMessage>
             {cities && cities.map(city =>
                 <option key={city.id} value={city.id}>{city.name}</option>
