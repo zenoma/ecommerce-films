@@ -11,3 +11,5 @@ export const getCinemas = state => getModuleState(state).cinemas;
 export const getSelectedCinema = state => getModuleState(state).selectedCinema;
 
 export const getMovie = state => getModuleState(state).movie;
+
+export const getMovieSession = state => getModuleState(state).movieSession;

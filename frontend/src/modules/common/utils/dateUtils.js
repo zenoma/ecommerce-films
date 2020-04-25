@@ -21,3 +21,13 @@ export const getArrayWithNextDays = (numberOfDays) => {
 
     return dates;
 }
+
+export const formatDateTime = (dateString) => {
+    let date=new Date(dateString);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    return `${day<10?`0${day}`:`${day}`}-${month<10?`0${month}`:`${month}`}-${year} ${hour<10?`0${hour}`:`${hour}`}:${minutes<10?`0${minutes}`:`${minutes}`}`;
+}

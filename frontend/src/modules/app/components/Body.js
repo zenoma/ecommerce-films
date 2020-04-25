@@ -8,6 +8,8 @@ import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users'
 import users from '../../users';
 import MovieDetails from '../../movies/components/MovieDetails';
 
+import MovieSessionView from '../../movies/components/MovieSessionView';
+
 const Body = () => {
 
     const loggedIn = useSelector(users.selectors.isLoggedIn);
@@ -20,6 +22,7 @@ const Body = () => {
             <Switch>
                 <Route exact path="/"><Home/></Route>
                 <Route exact path="/movie/:id"><MovieDetails/></Route>
+                <Route exact path="/movie/movie-session/:id"><MovieSessionView/></Route>
                 {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
                 {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
                 {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}

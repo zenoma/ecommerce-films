@@ -40,6 +40,14 @@ export default {
     'project.global.fields.movieSessions' : 'Sessions',
     'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .',
     
+    'project.movies.title': 'LISTING MOVIES',
     'project.movies.CitySelector.selectCities': 'Select a city',
-    'project.movies.CinemaSelector.selectCinemas': 'Select a cinema'
+    'project.movies.CinemaSelector.selectCinemas': 'Select a cinema',
+    'project.movies.DateSelector.selectDate': 'Select a date',
+
+    'project.movies.moviesession.duration': 'Duration(min)',
+    'project.movies.moviesession.price': 'Price',
+    'project.movies.moviesession.date': 'Date',
+    'project.movies.moviesession.room': 'Room',
+    'project.movies.moviesession.capacity': 'Capacity'
 }
