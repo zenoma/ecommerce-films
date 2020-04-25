@@ -9,3 +9,5 @@ export const getCities = state => getModuleState(state).cities;
 export const getCinemas = state => getModuleState(state).cinemas;
 
 export const getSelectedCinema = state => getModuleState(state).selectedCinema;
+
+export const getMovieSession = state => getModuleState(state).movieSession;

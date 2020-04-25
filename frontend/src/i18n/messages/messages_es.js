@@ -36,12 +36,19 @@ export default {
     'project.users.SignUp.title': 'Registrarse',
     'project.users.UpdateProfile.title': 'Actualizar perfil',
 
-
+    'project.movies.title': 'CARTELERA',
     'project.global.fields.movieTitle' : 'Título',
     'project.global.fields.movieSessions' : 'Sesiones',
     'project.global.fields.listingItemsEmpty' : 'No hay películas en la fecha seleccionada.',
 
     'project.movies.CitySelector.selectCities': 'Selecciona una ciudad',
-    'project.movies.CinemaSelector.selectCinemas': 'Selecciona un cine'
+    'project.movies.CinemaSelector.selectCinemas': 'Selecciona un cine',
+    'project.movies.DateSelector.selectDate': 'Selecciona una fecha',
+
+    'project.movies.moviesession.duration': 'Duración(min)',
+    'project.movies.moviesession.price': 'Precio',
+    'project.movies.moviesession.date': 'Fecha',
+    'project.movies.moviesession.room': 'Sala',
+    'project.movies.moviesession.capacity': 'Capacidad'
     
 }

@@ -7,6 +7,8 @@ import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
 
+import MovieSessionView from '../../movies/components/MovieSessionView';
+
 const Body = () => {
 
     const loggedIn = useSelector(users.selectors.isLoggedIn);
@@ -18,6 +20,7 @@ const Body = () => {
             <AppGlobalComponents/>
             <Switch>
                 <Route exact path="/"><Home/></Route>
+                <Route exact path="/movie/movie-session/:id"><MovieSessionView/></Route>
                 {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
                 {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
                 {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}
