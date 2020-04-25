@@ -40,7 +40,7 @@ public class MovieServiceTest {
 	private static final String[] MOVIE_TITLES= {"Avengers: Endgame", "Avatar", "Star Wars: El despertar de la fuerza"};
 	private static final String[] CITY_NAMES= {"A Coruña", "Pontevedra"};
 	private static final String[] CINEMA_NAMES= {"Cinesa", "Yelmo", "Galicine"};
-	private static final int NUM_MAX_ROOMS_BY_CINEMA=1;
+	private static final int NUM_MAX_ROOMS_BY_CINEMA=2;
 	private static final int HOUR_BETWEEN_SESSION=12;
 	private static final int DAYS_WITH_MOVIES=8;
 	
@@ -114,14 +114,12 @@ public class MovieServiceTest {
 		List<MovieSession> movieSessions=new ArrayList<>();
 		LocalDate today=LocalDate.now();
 		for(Movie movie:movies) {
-			for(int i=today.getDayOfMonth()-1;i<=today.getDayOfMonth()+(DAYS_WITH_MOVIES-1);i++) {
-				if(i==28 && today.getMonthValue()==2) break;
-				if(i<0) i+=30;
-				if(i>30) i-=30;
+			for(int i=-1; i < (DAYS_WITH_MOVIES -1);i++) {
+				today = today.plusDays(i);
 				for(int j=0;j<24; j+=HOUR_BETWEEN_SESSION) {
 					int minutes=30;
 					if(j%2!=0) minutes=55;
-					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
+					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), today.getDayOfMonth(), j, minutes));
 					movieSession=movieSessionDao.save(movieSession);
 					movieSessions.add(movieSession);
 				}
@@ -153,7 +151,7 @@ public class MovieServiceTest {
 		Long cinemaId=cinemas.get(0).getId();
 		LocalDate date=LocalDate.now();
 		
-		Set<ListingItem> listing=movieService.getListing(cinemaId, date);
+		List<ListingItem> listing=movieService.getListing(cinemaId, date);
 
 		for(ListingItem item:listing) {
 			for(MovieSession movieSession:item.getMovieSessions()) {
@@ -170,7 +168,7 @@ public class MovieServiceTest {
 		LocalDate date=LocalDate.now();
 		
 		for(int i=1; i<=6; i++) {
-			Set<ListingItem> listing=movieService.getListing(cinemaId, date.plusDays(i));
+			List<ListingItem> listing=movieService.getListing(cinemaId, date.plusDays(i));
 			for(ListingItem item:listing) {
 				for(MovieSession movieSession:item.getMovieSessions()) {
 					LocalDate dateReceived=LocalDate.of(movieSession.getDate().getYear(), movieSession.getDate().getMonth(), movieSession.getDate().getDayOfMonth());
@@ -210,7 +208,7 @@ public class MovieServiceTest {
 	
 	@Test
 	public void testGetAllCities() throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
-		Set<City> cities = movieService.getAllCities();
+		List<City> cities = movieService.getAllCities();
 		for(City city:cities) {
 			assertTrue(this.cities.contains(city));
 		}
@@ -219,7 +217,7 @@ public class MovieServiceTest {
 	@Test
 	public void testGetCinemasFromCity() throws InstanceNotFoundException {
 		Long cityId=cities.get(0).getId();
-		Set<Cinema> cinemas = movieService.getCinemasByCityId(cityId);
+		List<Cinema> cinemas = movieService.getCinemasByCityId(cityId);
 		for(Cinema cinema:cinemas) {
 			assertTrue(this.cinemas.contains(cinema));
 			assertEquals(cinema.getCity().getId(), cityId);

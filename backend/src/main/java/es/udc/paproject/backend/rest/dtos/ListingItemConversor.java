@@ -1,6 +1,6 @@
 package es.udc.paproject.backend.rest.dtos;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import es.udc.paproject.backend.model.entities.ListingItem;
@@ -10,8 +10,8 @@ public class ListingItemConversor {
 	private ListingItemConversor() {
 	}
 
-	public final static Set<ListingItemDto> toListingItemDtos(Set<ListingItem> listing) {
-		return listing.stream().map(listingItem -> toListingItemDto(listingItem)).collect(Collectors.toSet());
+	public final static List<ListingItemDto> toListingItemDtos(List<ListingItem> listing) {
+		return listing.stream().map(listingItem -> toListingItemDto(listingItem)).collect(Collectors.toList());
 	}
 
 	public final static ListingItemDto toListingItemDto(ListingItem listingItem) {

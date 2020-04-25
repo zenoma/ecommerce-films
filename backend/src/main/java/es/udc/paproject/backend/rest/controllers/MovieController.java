@@ -7,8 +7,8 @@ import static es.udc.paproject.backend.rest.dtos.MovieSessionConversor.toMovieSe
 import static es.udc.paproject.backend.rest.dtos.ListingItemConversor.toListingItemDtos;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -88,14 +88,14 @@ public class MovieController {
 	}
 
 	@GetMapping("/cities")
-	public Set<CityDto> getCities() {
-		Set<City> cities = movieService.getAllCities();
+	public List<CityDto> getCities() {
+		List<City> cities = movieService.getAllCities();
 		return toCityDtos(cities);
 	}
 
 	@GetMapping("/cinemas")
-	public Set<CinemaDto> getCinemas(@RequestParam Long cityId) throws InstanceNotFoundException {
-		Set<Cinema> cinemas = movieService.getCinemasByCityId(cityId);
+	public List<CinemaDto> getCinemas(@RequestParam Long cityId) throws InstanceNotFoundException {
+		List<Cinema> cinemas = movieService.getCinemasByCityId(cityId);
 		return toCinemaDtos(cinemas);
 	}
 
@@ -113,7 +113,7 @@ public class MovieController {
 	}
 
 	@GetMapping("/listing")
-	public Set<ListingItemDto> getListing(@RequestParam Long cinemaId, @RequestParam(required = false) String date)
+	public List<ListingItemDto> getListing(@RequestParam Long cinemaId, @RequestParam(required = false) String date)
 			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		LocalDate localDate = null;
 		if (date == null) {
@@ -121,7 +121,7 @@ public class MovieController {
 		} else {
 			localDate = LocalDate.parse(date);
 		}
-		Set<ListingItem> listing = movieService.getListing(cinemaId, localDate);
+		List<ListingItem> listing = movieService.getListing(cinemaId, localDate);
 		return toListingItemDtos(listing);
 	}
 }

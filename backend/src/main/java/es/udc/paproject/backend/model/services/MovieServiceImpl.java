@@ -4,10 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,12 +42,12 @@ public class MovieServiceImpl implements MovieService {
 	private MovieSessionDao movieSessionDao;
 
 	@Override
-	public Set<ListingItem> getListing(Long cinemaId, LocalDate date)
+	public List<ListingItem> getListing(Long cinemaId, LocalDate date)
 			throws InstanceNotFoundException, PreviousDateException, PlusWeekDateException {
 		LocalDateTime startDate=LocalDateTime.of(date, LocalTime.now()).withNano(0);
 		LocalDateTime endDate=LocalDateTime.of(date, LocalTime.of(23, 59)).withNano(0);
 		LocalDateTime limitWeek=LocalDateTime.now().plusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
-		Set<ListingItem> listingItems=new HashSet<>();
+		List<ListingItem> listingItems=new ArrayList<>();
 		
 		if(!cinemaDao.findById(cinemaId).isPresent()) {
 			throw new InstanceNotFoundException("project.entities.Cinema", cinemaId);
@@ -64,7 +62,7 @@ public class MovieServiceImpl implements MovieService {
 		if (!date.equals(LocalDate.now())) {
 			startDate = LocalDateTime.of(date, LocalTime.of(0, 0)).withNano(0);
 		}
-		Set<MovieSession> movieSessionList=movieSessionDao.findByRoomCinemaIdAndDateBetweenOrderByMovieTitleDescDateAsc(cinemaId, startDate, endDate);
+		List<MovieSession> movieSessionList=movieSessionDao.findByRoomCinemaIdAndDateBetweenOrderByMovieTitleAscDateAsc(cinemaId, startDate, endDate);
 		
 		Movie movie=new Movie();
 		List<MovieSession> movieSessions=new ArrayList<>();
@@ -83,14 +81,12 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Set<City> getAllCities() {
-		Set<City> cities = new HashSet<City>();
-		cityDao.findAll().forEach(cities::add);
-		return cities;
+	public List<City> getAllCities() {
+		return cityDao.findAllByOrderByName();
 	}
 
 	@Override
-	public Set<Cinema> getCinemasByCityId(Long cityId) throws InstanceNotFoundException {
+	public List<Cinema> getCinemasByCityId(Long cityId) throws InstanceNotFoundException {
 		City city = checkCity(cityId);
 		return cinemaDao.findByCityIdOrderByName(city.getId());
 	}
