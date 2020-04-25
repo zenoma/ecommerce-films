@@ -1,3 +1,6 @@
+import * as dateUtils from './utils/dateUtils';
+export default {dateUtils};
+
 export {default as ConfirmDialog} from "./components/ConfirmDialog";
 export {default as ErrorDialog} from "./components/ErrorDialog";
 export {default as Errors} from "./components/Errors";

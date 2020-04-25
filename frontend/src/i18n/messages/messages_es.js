@@ -34,6 +34,14 @@ export default {
     'project.users.Login.title': 'Autenticarse',
     'project.users.SignUp.fields.confirmPassword': 'Confirmar contraseña',
     'project.users.SignUp.title': 'Registrarse',
-    'project.users.UpdateProfile.title': 'Actualizar perfil'
+    'project.users.UpdateProfile.title': 'Actualizar perfil',
 
+
+    'project.global.fields.movieTitle' : 'Título',
+    'project.global.fields.movieSessions' : 'Sesiones',
+    'project.global.fields.listingItemsEmpty' : 'No hay películas en la fecha seleccionada.',
+
+    'project.movies.CitySelector.selectCities': 'Selecciona una ciudad',
+    'project.movies.CinemaSelector.selectCinemas': 'Selecciona un cine'
+    
 }
