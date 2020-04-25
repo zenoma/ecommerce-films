@@ -75,6 +75,7 @@ INSERT INTO Room(name,capacity,cinemaId)
 INSERT INTO Room(name,capacity,cinemaId)
     VALUES ("Sala C", 5, 5);
 
+
 INSERT INTO Movie(title,synopsis,duration)
 	VALUES ("Batman Begins", "This is a synopsis",180);
 
@@ -113,6 +114,196 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,3,5.0,80, DATE_ADD(DATE(NOW()), INTERVAL '2 23:55' DAY_MINUTE));
 
+#Cine Espacio Coruña
+#Sala 1
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,4,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+#Sala 2
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,5,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+#Sala 3
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,6,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+
+#Cine Muralla
+#Sala 1
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,7,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+#Sala 2
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,8,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+#Sala 3
+#Hoy
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '0 23:05' DAY_MINUTE));
+#Mañana
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 13:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 20:05' DAY_MINUTE));
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (1,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '1 23:05' DAY_MINUTE));
+#Pasado
+INSERT INTO MovieSession(movieId,roomId,price,seats,date)
+    VALUES (2,9,5.0,120, DATE_ADD(DATE(NOW()), INTERVAL '2 00:05' DAY_MINUTE));
+
+
 #Cine Ravachol
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (1,13,5.0,50, DATE_ADD(DATE(NOW()), INTERVAL '0 00:05' DAY_MINUTE));
@@ -127,7 +318,7 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (2,13,5.0,50, DATE_ADD(DATE(NOW()), INTERVAL '0 20:00' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
-    VALUES (1,14,5.0,10, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
+    VALUES (1,4,5.0,10, DATE_ADD(DATE(NOW()), INTERVAL '1 00:05' DAY_MINUTE));
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (1,14,5.0,10, DATE_ADD(DATE(NOW()), INTERVAL '1 17:00' DAY_MINUTE));
@@ -146,7 +337,6 @@ INSERT INTO MovieSession(movieId,roomId,price,seats,date)
 
 INSERT INTO MovieSession(movieId,roomId,price,seats,date)
     VALUES (3,15,5.0,5, DATE_ADD(DATE(NOW()), INTERVAL '6 20:00' DAY_MINUTE));
-
 
 
 INSERT INTO User(userName, password, firstName, lastName, email, role)
