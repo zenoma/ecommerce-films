@@ -3,3 +3,4 @@ export const GET_CITIES_COMPLETED = "/project/movie/getCitiesCompleted";
 export const GET_CINEMAS_COMPLETED = "/project/movie/getCinemasCompleted";
 export const CLEAR_SELECTED_CINEMA = "/project/movie/clearSelectedCinema";
 export const CLEAR_MOVIES = "/project/movie/clearMovies";
+export const FIND_MOVIE_BY_ID = "/project/movie/findMovieById";

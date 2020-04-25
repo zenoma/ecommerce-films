@@ -11,3 +11,7 @@ export const getCities = (onSuccess) => {
 export const getCinemas = (cityId, onSuccess) => {
     appFetch(`/movie/cinemas?cityId=${cityId}`, config('GET'), onSuccess);
 }
+
+export const getMovieById = (movieId, onSuccess) => {
+    appFetch(`/movie/${movieId}`, config('GET'), onSuccess);
+}

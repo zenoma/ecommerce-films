@@ -48,3 +48,14 @@ const clearSelectedCinema = () =>({
 const clearMovies = () =>({
     type: actionTypes.CLEAR_MOVIES
 });
+
+
+const getMovieByIdCompleted = movie => ({
+    type: actionTypes.FIND_MOVIE_BY_ID,
+    movie
+})
+
+export const getMovieById = id => dispatch =>{
+    backend.movieService.getMovieById(id,
+        movie => dispatch(getMovieByIdCompleted(movie)));
+}

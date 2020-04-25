@@ -7,7 +7,8 @@ const initialState = {
     listingDate: null,
     cities: null, 
     cinemas: null,
-    selectedCinema: null
+    selectedCinema: null,
+    movie : null
 };
 
 const movies = (state = initialState.movies, action) => {
@@ -59,12 +60,22 @@ const cinemas = (state = initialState.cinemas, action) => {
     }
 }
 
+const movie = (state = initialState.movie, action) => {
+    switch (action.type) {
+        case actionTypes.FIND_MOVIE_BY_ID:
+            return action.movie;    
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     movies,
     listingDate,
     selectedCinema,
     cities, 
-    cinemas
+    cinemas,
+    movie
 });
 
 export default reducer;
