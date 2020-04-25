@@ -8,6 +8,7 @@ const initialState = {
     cities: null, 
     cinemas: null,
     selectedCinema: null,
+    movie : null,
     movieSession: null
 };
 
@@ -60,6 +61,18 @@ const cinemas = (state = initialState.cinemas, action) => {
     }
 }
 
+const movie = (state = initialState.movie, action) => {
+    switch (action.type) {
+        case actionTypes.FIND_MOVIE_BY_ID:
+            return action.movie; 
+        case actionTypes.CLEAR_MOVIE_DETAILS:
+            return initialState.movie;
+        default:
+            return state;
+    }
+}
+    
+
 const movieSession = (state = initialState.movieSession, action) => {
     switch(action.type){
         case actionTypes.GET_MOVIESESSION_COMPLETED:
@@ -77,6 +90,7 @@ const reducer = combineReducers({
     selectedCinema,
     cities, 
     cinemas,
+    movie,
     movieSession
 });
 

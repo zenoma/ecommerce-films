@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import Sessions from './Sessions';
+import {Link} from 'react-router-dom';
 
 const Movies = (listingItems) => {
 
@@ -16,7 +17,7 @@ const Movies = (listingItems) => {
         contentBody = 
             listingItems.movies.map(movie => 
                 <tr className="d-flex" key={movie.movieId}>
-                    <td className="col-6">{movie.movieTitle}</td>
+                    <td className="col-6"><Link to= {`/movie/${movie.movieId}`}>{movie.movieTitle}</Link></td>
                     <td className="col-6"><Sessions sessions={movie.movieSessions}/> </td>
                 </tr>
             )
