@@ -15,10 +15,10 @@ const MovieSessionVIew = () =>{
 
     const session = useSelector(selectors.getMovieSession);
     const {id} = useParams();
+    let movieSessionId;
 
     useEffect(() => {
-        const movieSessionId = Number(id);
-
+        movieSessionId = Number(id);
         if (!Number.isNaN(movieSessionId)) {
             dispatch(actions.getMovieSession(movieSessionId));
         }
@@ -71,6 +71,9 @@ const MovieSessionVIew = () =>{
                         </FormattedMessage>
                          {session.seats}
                     </div>
+                </div>
+                <div className="col-12 col-md-6">
+                    <BuyForm sessionId = {movieSessionId}>
                 </div>
             </div>
         </div>

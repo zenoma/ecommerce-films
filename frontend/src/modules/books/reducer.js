@@ -3,21 +3,16 @@ import {combineReducers} from 'redux';
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-    book: null
+    ticket: null
+
 };
 
-const book = (state = initialState.book, action) => {
+const ticket = (state = initialState.ticket, action) => {
 
     switch (action.type) {
 
         case actionTypes.BUY_TICKET_COMPLETED:
-            return ;
-
-        case actionTypes.DELIVER_TICKET_COMPLETED:
-            return ;
-
-        case actionTypes.FIND_BOOKS:
-            return ;
+            return action.ticket;
 
         default:
             return state;
@@ -27,7 +22,7 @@ const book = (state = initialState.book, action) => {
 }
 
 const reducer = combineReducers({
-    book
+    ticket
 });
 
 export default reducer;

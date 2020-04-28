@@ -2,18 +2,20 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useHistory} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const BuyForm = () => {
+const BuyForm = (sessionId) => {
 
     const dispatch = useDispatch();
     const history = useHistory();
     const [seats, setSeats] = useState('');
     const [creditCard, setCreditCard] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
+    const loggedIn = useSelector(users.selectors.isLoggedIn);
     let form;
 
     const handleSubmit = event => {
@@ -22,9 +24,8 @@ const BuyForm = () => {
 
         if (form.checkValidity()) {
 
-            dispatch(actions.buy(shoppingCart.id, 
-                postalAddress.trim(), postalCode.trim(), 
-                () => history.push('/shopping/purchase-completed'),
+            dispatch(actions.buyTickets(seats, creditCard.trim(), sessionId,
+                () => history.push('/books/purchase-completed'),
                 errors => setBackendErrors(errors)));
 
         } else {
@@ -35,61 +36,70 @@ const BuyForm = () => {
     }
 
     return (
-
-        <div>
-            <Errors errors={backendErrors}
-                onClose={() => setBackendErrors(null)}/>
-            <div className="card bg-light border-dark">
-                <h5 className="card-header">
-                    <FormattedMessage id="project.shopping.BuyForm.title"/>
-                </h5>
-                <div className="card-body">
-                    <form ref={node => form = node}
-                        className="needs-validation" noValidate 
-                        onSubmit={(e) => handleSubmit(e)}>
-                        <div className="form-group row">
-                            <label htmlFor="postalAddress" className="col-md-3 col-form-label">
-                                <FormattedMessage id="project.global.fields.postalAddress"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="postalAddress" className="form-control"
-                                    value={postalAddress}
-                                    onChange={e => setPostalAddress(e.target.value)}
-                                    autoFocus
-                                    required/>
-                                <div className="invalid-feedback">
-                                    <FormattedMessage id='project.global.validator.required'/>
+         {loggedIn && 
+            <div>
+                <Errors errors={backendErrors}
+                    onClose={() => setBackendErrors(null)}/>
+                <div className="card bg-light border-dark">
+                    <h5 className="card-header">
+                        <FormattedMessage id="project.books.BuyForm.title"/>
+                    </h5>
+                    <div className="card-body">
+                        <form ref={node => form = node}
+                            className="needs-validation" noValidate 
+                            onSubmit={(e) => handleSubmit(e)}>
+                            <div className="form-group row">
+                                <label htmlFor="seats" className="col-md-3 col-form-label">
+                                    <FormattedMessage id="project.global.fields.seats"/>
+                                </label>
+                                <div className="col-md-4">
+                                    <input type="number" id="seats" className="form-control mr-2"
+                                        value={seats}
+                                        onChange={e => setSeats(Number(e.target.value)}
+                                        min="1"
+                                        max="10"
+                                        required/>
+                                    <button type="submit" className="btn btn-primary">
+                                        <FormattedMessage id="project.global.buttons.save"/>
+                                    </button>
+                                    <div className="invalid-feedback">
+                                        <FormattedMessage id='project.global.validator.required'/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="form-group row">
-                            <label htmlFor="postalCode" className="col-md-3 col-form-label">
-                                <FormattedMessage id="project.global.fields.postalCode"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="postalCode" className="form-control"
-                                    value={postalCode}
-                                    onChange={e => setPostalCode(e.target.value)}
-                                    required/>
-                                <div className="invalid-feedback">
-                                    <FormattedMessage id='project.global.validator.required'/>
+                            <div className="form-group row">
+                                <label htmlFor="creditCard" className="col-md-3 col-form-label">
+                                    <FormattedMessage id="project.global.fields.creditCard"/>
+                                </label>
+                                <div className="col-md-4">
+                                    <input type="text" id="creditCard" className="form-control"
+                                        value={creditCard}
+                                        onChange={e => setCreditCard(e.target.value)}
+                                        required/>
+                                    <div className="invalid-feedback">
+                                        <FormattedMessage id='project.global.validator.required'/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="form-group row">
-                            <div className="offset-md-3 col-md-1">
-                                <button type="submit" className="btn btn-primary">
-                                    <FormattedMessage id="project.global.buttons.buy"/>
-                                </button>
+                            <div className="form-group row">
+                                <div className="offset-md-3 col-md-1">
+                                    <button type="submit" className="btn btn-primary">
+                                        <FormattedMessage id="project.global.buttons.buy"/>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        }
     );
 
 }
+
+BuyForm.propTypes = {
+    sessionId: PropTypes.number
+};
+
 
 export default BuyForm;
