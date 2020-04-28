@@ -1,10 +1,8 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import * as selectors from "../selectors";
-import * as actions from "../actions";
-import common from "../../common";
-
 import {FormattedMessage} from 'react-intl';
+import Link from 'react-dom';
 
 const PurchasedCompleted = () =>{
     const ticket = useSelector(selectors.getTicket);
@@ -12,7 +10,11 @@ const PurchasedCompleted = () =>{
     return (
 
          <div className="container">
-         <Link to={`/`}>{'Volver a Cartelera'}</Link>
+         <Link to={`/`}>  
+            <FormattedMessage id='project.global.fields.goHome'>
+                {message => (<strong>{message}: </strong>)}
+            </FormattedMessage>
+        </Link>
          
             <div className="row">
                 <div className="col-12 col-md-6">

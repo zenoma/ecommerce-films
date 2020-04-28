@@ -5,6 +5,7 @@ import * as selectors from "../selectors";
 import * as actions from '../actions';
 
 import {BackLink} from '../../common';
+import BuyForm from '../../Books/components/BuyForm';
 
 import {FormattedMessage} from 'react-intl';
 
@@ -73,7 +74,7 @@ const MovieSessionVIew = () =>{
                     </div>
                 </div>
                 <div className="col-12 col-md-6">
-                    <BuyForm sessionId = {movieSessionId}>
+                    <BuyForm sessionId = {movieSessionId}/>
                 </div>
             </div>
         </div>

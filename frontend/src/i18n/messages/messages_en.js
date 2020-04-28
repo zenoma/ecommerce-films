@@ -39,6 +39,7 @@ export default {
     'project.global.fields.movieTitle' : 'Title',
     'project.global.fields.movieSessions' : 'Sessions',
     'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .',
+    'project.global.fields.goHome' : 'Go home',
     
     'project.movies.title': 'LISTING MOVIES',
     'project.movies.CitySelector.selectCities': 'Select a city',
@@ -51,5 +52,11 @@ export default {
     'project.movies.fields.cinema': 'Cinema',
     'project.movies.fields.room': 'Room',
     'project.movies.fields.capacity': 'Capacity',
-    'project.movies.fields.synopsis': 'Synopsis'
+    'project.movies.fields.synopsis': 'Synopsis',
+
+    'project.books.fields.id': 'Book code',
+    'project.books.fields.creditCard': 'Credit card',
+    'project.books.fields.seats': 'Seats',
+    'project.books.BuyForm.title': 'Buy'
+
 }

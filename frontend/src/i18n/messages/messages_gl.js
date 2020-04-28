@@ -41,6 +41,7 @@ export default {
     'project.global.fields.movieTitle' : 'Título',
     'project.global.fields.movieSessions' : 'Sesións',
     'project.global.fields.listingItemsEmpty' : 'Non hai películas na data selecionada.',
+    'project.global.fields.goHome' : 'Volver a inicio',
 
     'project.movies.CitySelector.selectCities': 'Seleciona unha cidade',
     'project.movies.CinemaSelector.selectCinemas': 'Seleciona un cine',
@@ -53,4 +54,9 @@ export default {
     'project.movies.fields.room': 'Sala',
     'project.movies.fields.capacity': 'Capacidade',
     'project.movies.fields.synopsis': 'Resumo'
+
+    'project.books.fields.id': 'Código de reserva',
+    'project.books.fields.creditCard': 'Tarxeta de crédito',
+    'project.books.fields.seats': 'Asientos',
+    'project.books.BuyForm.title': 'Comprar'
 }
