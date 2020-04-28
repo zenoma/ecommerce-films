@@ -3,9 +3,9 @@ import * as actionTypes from './actionTypes';
 
 export const buyTickets = (seats, creditCard, sessionId, onSuccess, 
     onErrors) => dispatch =>
-    backend.bookingService.buyTickets(seats, creditCard,
+    backend.bookService.buyTickets(seats, creditCard,
         sessionId, ({id}) => {
-        dispatch(buyTicketCompleted({id, seats, creditCard, sessionId}));
+        dispatch(buyTicketCompleted(id));
         onSuccess();
     },
         onErrors);
