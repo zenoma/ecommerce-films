@@ -10,12 +10,6 @@ const PurchaseCompleted = (selectProps) =>{
     return (
 
         <div className="container">
-            <Link to={`/`}>  
-                <FormattedMessage id='project.global.fields.goHome'>
-                    {message => (<strong>{message}: </strong>)}
-                </FormattedMessage>
-            </Link>
-         
             <div className="row">
                 <div className="col-12 col-md-6">
                     <div className="info mb-2">
@@ -35,6 +29,11 @@ const PurchaseCompleted = (selectProps) =>{
                             {message => (<strong>{message}: </strong>)}
                         </FormattedMessage>
                         {selectProps.ticket.seats}
+                    </div>
+                     <div className="info mb-2">
+                        <FormattedMessage id='project.books.fields.confirmationMessage'>
+                            {message => (<p>{message}.</p>)}
+                        </FormattedMessage>
                     </div>
                 </div>
             </div>

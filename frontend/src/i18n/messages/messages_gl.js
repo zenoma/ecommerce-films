@@ -59,5 +59,6 @@ export default {
     'project.books.fields.id': 'Código de reserva',
     'project.books.fields.creditCard': 'Tarxeta de crédito',
     'project.books.fields.seats': 'Asientos',
-    'project.books.BuyForm.title': 'Comprar'
+    'project.books.BuyForm.title': 'Comprar',
+    'project.books.fields.confirmationMessage' : 'Antes do comezo da película, presenta o teu código xunto a tarxeta de crédito para recoller as entradas'
 }

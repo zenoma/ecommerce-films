@@ -58,6 +58,7 @@ export default {
     'project.books.fields.id': 'Book code',
     'project.books.fields.creditCard': 'Credit card',
     'project.books.fields.seats': 'Seats',
-    'project.books.BuyForm.title': 'Buy'
+    'project.books.BuyForm.title': 'Buy',
+    'project.books.fields.confirmationMessage' : 'Before the movie begins, present your code and credit card to get the tickets'
 
 }
