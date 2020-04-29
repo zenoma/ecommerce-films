@@ -133,14 +133,12 @@ public class BookingServiceTest {
 		List<MovieSession> movieSessions=new ArrayList<>();
 		LocalDate today=LocalDate.now();
 		for(Movie movie:movies) {
-			for(int i=today.getDayOfMonth()-1;i<=today.getDayOfMonth()+(DAYS_WITH_MOVIES-1);i++) {
-				if(i==28 && today.getMonthValue()==2) break;
-				if(i<0) i+=30;
-				if(i>30) i-=30;
+			for(int i=-1; i < (DAYS_WITH_MOVIES -1);i++) {
+				today = today.plusDays(i);
 				for(int j=0;j<24; j+=HOUR_BETWEEN_SESSION) {
 					int minutes=30;
 					if(j%2!=0) minutes=55;
-					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), i, j, minutes));
+					MovieSession movieSession=new MovieSession(movie, room, BigDecimal.valueOf(8.20), LocalDateTime.of(today.getYear(), today.getMonthValue(), today.getDayOfMonth(), j, minutes));
 					movieSession=movieSessionDao.save(movieSession);
 					movieSessions.add(movieSession);
 				}
