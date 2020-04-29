@@ -5,6 +5,7 @@ import * as selectors from "../selectors";
 import * as actions from '../actions';
 
 import {BackLink} from '../../common';
+import BuyForm from '../../books/components/BuyForm';
 
 import {FormattedMessage} from 'react-intl';
 
@@ -18,7 +19,6 @@ const MovieSessionVIew = () =>{
 
     useEffect(() => {
         const movieSessionId = Number(id);
-
         if (!Number.isNaN(movieSessionId)) {
             dispatch(actions.getMovieSession(movieSessionId));
         }
@@ -34,7 +34,7 @@ const MovieSessionVIew = () =>{
 
             <h1 className="mb-5 text-center">{session.movieTitle}</h1>
             <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-md-3">
                     <div className="info mb-2">
                         <FormattedMessage id='project.movies.fields.duration'>
                             {message => (<strong>{message}: </strong>)}
@@ -71,6 +71,9 @@ const MovieSessionVIew = () =>{
                         </FormattedMessage>
                          {session.seats}
                     </div>
+                </div>
+                <div className="col-12 col-md-9">
+                    <BuyForm sessionId = {Number(id)}/>
                 </div>
             </div>
         </div>

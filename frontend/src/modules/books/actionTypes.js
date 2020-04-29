@@ -1,0 +1,1 @@
+export const BUY_TICKET_COMPLETED = "project/books/buyTicketCompleted";

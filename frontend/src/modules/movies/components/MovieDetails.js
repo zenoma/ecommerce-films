@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {FormattedMessage, FormattedNumber} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {useParams} from 'react-router-dom';
 
 import * as selectors from '../selectors';
