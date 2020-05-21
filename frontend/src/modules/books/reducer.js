@@ -13,7 +13,8 @@ const ticket = (state = initialState.ticket, action) => {
 
         case actionTypes.BUY_TICKET_COMPLETED:
             return action.ticket;
-
+        case actionTypes.CLEAR_TICKET:
+            return initialState.ticket;
         default:
             return state;
 

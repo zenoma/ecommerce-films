@@ -14,7 +14,6 @@ import MovieSessionView from '../../movies/components/MovieSessionView';
 const Body = () => {
 
     const loggedIn = useSelector(users.selectors.isLoggedIn);
-    const ticket = useSelector(books.selectors.getTicket);
     
    return (
 
@@ -25,7 +24,6 @@ const Body = () => {
                 <Route exact path="/"><Home/></Route>
                 <Route exact path="/movie/:id"><MovieDetails/></Route>
                 <Route exact path="/movie/movie-session/:id"><MovieSessionView/></Route>
-                {loggedIn && ticket && <Route exact path="/books/purchase-completed"><PurchaseCompleted/></Route>}
                 {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
                 {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
                 {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}

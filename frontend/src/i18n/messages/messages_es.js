@@ -13,6 +13,7 @@ export default {
     'project.global.buttons.ok': 'OK',
     'project.global.buttons.back': 'Anterior',
     'project.global.buttons.save': 'Guardar',
+    'project.global.buttons.buy': 'Comprar',
     'project.global.exceptions.NetworkError': 'Fallo de comunicación',
     'project.global.fields.date': 'Fecha',
     'project.global.fields.email': 'Correo electrónico',
@@ -52,10 +53,11 @@ export default {
     'project.movies.fields.cinema': 'Cine',
     'project.movies.fields.room': 'Sala',
     'project.movies.fields.capacity': 'Capacidad',
-    'project.movies.fields.synopsis': 'Resumen'
+    'project.movies.fields.synopsis': 'Resumen',
     
     'project.books.fields.id': 'Código de reserva',
     'project.books.fields.creditCard': 'Tarjeta de crédito',
     'project.books.fields.seats': 'Asientos',
-    'project.books.BuyForm.title': 'Comprar'
+    'project.books.BuyForm.title': 'Comprar',
+    'project.books.fields.confirmationMessage' : 'Antes del comienzo de la película, presenta tu código junto a la tarjeta de crédito para recoger las entradas'
 }

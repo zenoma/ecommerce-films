@@ -1,14 +1,14 @@
 import {config, appFetch} from './appFetch';
 
-export const buyTickets = (seats, creditCard, sessionId, onSuccess, 
+export const buyTickets = (tickets, creditcard, movieSessionId, onSuccess, 
     onErrors) =>
     appFetch(`/booking/books/buy`, 
-        config('POST', {seats, creditCard, sessionId}), onSuccess, onErrors);
+        config('POST', {tickets, creditcard, movieSessionId}), onSuccess, onErrors);
 
-export const deliverTicket = (creditCard, code, onSuccess, 
+export const deliverTicket = (creditcard, code, onSuccess, 
     onErrors) =>
     appFetch(`/booking/books/deliver`, 
-        config('POST', {creditCard, code}), onSuccess, onErrors);
+        config('POST', {creditcard, code}), onSuccess, onErrors);
 
 export const findBooks = ({page}, onSuccess) => 
     appFetch(`/booking/books?page=${page}`, config('GET'), onSuccess);
