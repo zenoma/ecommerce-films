@@ -109,6 +109,7 @@ public class BookingController {
 	}
 
 	@PostMapping("/books/deliver")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deliverTicket(@Validated @RequestBody DeliverTicketDto deliverTicketDto)
 			throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException,
 			MovieSessionAlreadyStartedException {
