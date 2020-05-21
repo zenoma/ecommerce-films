@@ -6,7 +6,6 @@ import AppGlobalComponents from './AppGlobalComponents';
 import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
-import books from '../../books';
 import MovieDetails from '../../movies/components/MovieDetails';
 
 import MovieSessionView from '../../movies/components/MovieSessionView';

@@ -1,8 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import * as selectors from "../selectors";
 import {FormattedMessage} from 'react-intl';
-import Link from 'react-dom';
 import PropTypes from 'prop-types';
 
 const PurchaseCompleted = (selectProps) =>{

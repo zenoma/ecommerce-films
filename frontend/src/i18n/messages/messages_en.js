@@ -36,6 +36,7 @@ export default {
     'project.users.SignUp.fields.confirmPassword': 'Confirm password',
     'project.users.SignUp.title': 'Sign up',
     'project.users.UpdateProfile.title': 'Update profile',
+    'project.users.BookHistory.title': 'Book History',
 
     'project.global.fields.movieTitle' : 'Title',
     'project.global.fields.movieSessions' : 'Sessions',
@@ -59,6 +60,6 @@ export default {
     'project.books.fields.creditCard': 'Credit card',
     'project.books.fields.seats': 'Seats',
     'project.books.BuyForm.title': 'Buy',
-    'project.books.fields.confirmationMessage' : 'Before the movie begins, present your code and credit card to get the tickets'
-
+    'project.books.fields.confirmationMessage' : 'Before the movie begins, present your code and credit card to get the tickets',
+    'project.books.ValidateTicket.title': 'Validate Ticket'
 }

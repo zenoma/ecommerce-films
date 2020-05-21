@@ -36,6 +36,7 @@ export default {
     'project.users.SignUp.fields.confirmPassword': 'Confirmar contrasinal',
     'project.users.SignUp.title': 'Rexistrarse',
     'project.users.UpdateProfile.title': 'Actualizar perfil',
+    'project.users.BookHistory.title': 'Histórico de compras',
 
 
     'project.movies.title': 'CARTELERA',
@@ -60,5 +61,6 @@ export default {
     'project.books.fields.creditCard': 'Tarxeta de crédito',
     'project.books.fields.seats': 'Asientos',
     'project.books.BuyForm.title': 'Comprar',
-    'project.books.fields.confirmationMessage' : 'Antes do comezo da película, presenta o teu código xunto a tarxeta de crédito para recoller as entradas'
+    'project.books.fields.confirmationMessage' : 'Antes do comezo da película, presenta o teu código xunto a tarxeta de crédito para recoller as entradas',
+    'project.books.ValidateTicket.title': 'Validar entrada'
 }
