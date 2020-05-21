@@ -4,7 +4,6 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
     ticket: null
-
 };
 
 const ticket = (state = initialState.ticket, action) => {

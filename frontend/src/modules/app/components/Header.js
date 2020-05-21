@@ -21,16 +21,14 @@ const Header = () => {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                {role==="TICKETSELLER" ?
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="dropdown-item" to="/validate-ticket">
-                            <FormattedMessage id="project.books.ValidateTicket.title"/>
-                        </Link>
-                    </li>
-                </ul>
-                : 
-                <ul className="navbar-nav mr-auto"></ul>
+                {role==="TICKETSELLER" &&
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="dropdown-item" to="/books/deliver">
+                                <FormattedMessage id="project.books.DeliverTicket.title"/>
+                            </Link>
+                        </li>
+                    </ul>
                 }
                 
                 <ul className="navbar-nav mr-auto"></ul>
@@ -53,11 +51,11 @@ const Header = () => {
                             <Link className="dropdown-item" to="/users/change-password">
                                 <FormattedMessage id="project.users.ChangePassword.title"/>
                             </Link>
-                            {role==="USER" ?
-                            <Link className="dropdown-item" to="/users/book-history">
-                                <FormattedMessage id="project.users.BookHistory.title"/>
-                            </Link>
-                            : <div></div>}
+                            {role==="USER" &&
+                                <Link className="dropdown-item" to="/users/book-history">
+                                    <FormattedMessage id="project.users.BookHistory.title"/>
+                                </Link>
+                            }
                             <div className="dropdown-divider"></div>
                             <Link className="dropdown-item" to="/users/logout">
                                 <FormattedMessage id="project.app.Header.logout"/>

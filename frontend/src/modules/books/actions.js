@@ -5,10 +5,10 @@ export const buyTickets = (seats, creditCard, sessionId, onSuccess,
     onErrors) => dispatch =>
     backend.bookService.buyTickets(seats, creditCard,
         sessionId, ({id}) => {
-        dispatch(buyTicketCompleted(id));
-        onSuccess();
+            dispatch(buyTicketCompleted(id));
+            onSuccess();
     },
-        onErrors);
+    onErrors);
 
 const buyTicketCompleted = (ticket) => ({
     type: actionTypes.BUY_TICKET_COMPLETED,
@@ -18,3 +18,8 @@ const buyTicketCompleted = (ticket) => ({
 export const clearTicket = () =>({
     type: actionTypes.CLEAR_TICKET
 });
+
+export const deliverTicket = (bookId, creditCard, onSuccess, 
+    onErrors) => dispatch => {
+        backend.bookService.deliverTicket(creditCard, bookId, onSuccess, onErrors);
+}
