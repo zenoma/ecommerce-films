@@ -23,7 +23,7 @@ public class BookConversor {
 	}
 
 	public final static BookDto toBookDto(Book book) {
-		return new BookDto(book.getDate(), book.getMovieSession().getMovie().getTitle(), book.getTickets(),
+		return new BookDto(book.getId(), book.getDate(), book.getMovieSession().getMovie().getTitle(), book.getTickets(),
 				book.getTickets() * book.getMovieSession().getPrice().doubleValue(), book.getMovieSession().getDate());
 	}
 }

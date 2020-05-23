@@ -6,10 +6,9 @@ import AppGlobalComponents from './AppGlobalComponents';
 import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
-import MovieDetails from '../../movies/components/MovieDetails';
-import MovieSessionView from '../../movies/components/MovieSessionView';
 
-import {DeliverTicket} from '../../books';
+import {MovieDetails,MovieSessionView} from '../../movies';
+import {DeliverTicket,BookHistory, BookHistoryResult} from '../../books';
 
 const Body = () => {
 
@@ -31,6 +30,8 @@ const Body = () => {
                 {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}
                 {!loggedIn && <Route exact path="/users/login"><Login/></Route>}
                 {!loggedIn && <Route exact path="/users/signup"><SignUp/></Route>}
+                {role==="USER" && <Route exact path="/users/book-history"><BookHistory/></Route>}
+                {role==="USER" && <Route exact path="/users/book-history-result"><BookHistoryResult/></Route>}
                 <Route><Home/></Route>
             </Switch>
         </div>

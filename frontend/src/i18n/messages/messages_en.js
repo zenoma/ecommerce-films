@@ -43,7 +43,9 @@ export default {
     'project.global.fields.listingItemsEmpty' : 'There are no movies in the selected date .',
     'project.global.fields.goHome' : 'Go home',
     'project.global.buttons.deliver' : "Deliver",
-    
+    'project.global.fields.purchaseSeats' : 'Seats',
+    'project.global.fields.totalPrice' : 'Price',
+    'project.global.fields.sessionDate' : 'Session Date',
     'project.movies.title': 'LISTING MOVIES',
     'project.movies.CitySelector.selectCities': 'Select a city',
     'project.movies.CinemaSelector.selectCinemas': 'Select a cinema',
@@ -63,5 +65,6 @@ export default {
     'project.books.BuyForm.title': 'Buy',
     'project.books.fields.confirmationMessage' : 'Before the movie begins, present your code and credit card to get the tickets',
     'project.books.DeliverTicket.title': 'Deliver Ticket',
-    'project.books.DeliverTicket.delivered': 'Ticket delivered successfully!'
+    'project.books.DeliverTicket.delivered': 'Ticket delivered successfully!',
+    'project.books.FindBookHistory.noBooks': 'No books found'
 }

@@ -4,22 +4,33 @@ import java.time.LocalDateTime;
 
 public class BookDto {
 
+	private Long id;
 	private LocalDateTime dateBook;
 	private String movieTitle;
 	private int tickets;
-	private double prize;
+	private double price;
 	private LocalDateTime dateMovieSession;
-	
-	public BookDto() {}
 
-	public BookDto(LocalDateTime dateBook, String movieTitle, int tickets, double prize,
+	public BookDto() {
+	}
+
+	public BookDto(Long id, LocalDateTime dateBook, String movieTitle, int tickets, double price,
 			LocalDateTime dateMovieSession) {
 		super();
+		this.id = id;
 		this.dateBook = dateBook;
 		this.movieTitle = movieTitle;
 		this.tickets = tickets;
-		this.prize = prize;
+		this.price = price;
 		this.dateMovieSession = dateMovieSession;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalDateTime getDateBook() {
@@ -46,12 +57,12 @@ public class BookDto {
 		this.tickets = tickets;
 	}
 
-	public double getPrize() {
-		return prize;
+	public double getprice() {
+		return price;
 	}
 
-	public void setPrize(double prize) {
-		this.prize = prize;
+	public void setprice(double price) {
+		this.price = price;
 	}
 
 	public LocalDateTime getDateMovieSession() {

@@ -1,3 +1,8 @@
-const getModuleState = state => state.books;
+const getModuleState = state => 
+    state.books;
 
-export const getTicket = state => getModuleState(state).ticket;
+export const getTicket = state => 
+    getModuleState(state).ticket;
+
+export const getBookHistory = state => 
+    getModuleState(state).bookHistory;
