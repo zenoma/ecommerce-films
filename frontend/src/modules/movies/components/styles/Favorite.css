@@ -1,0 +1,23 @@
+.favorite{
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: #b3b300;
+    display: flex;
+}
+
+.favorite span:first-child{
+    flex:1;
+}
+
+.favorite span{
+    flex:6;
+}
+
+.favorite span svg{
+    font-size: 25px;
+    line-height: 30px;;
+}
+
+.favorite span svg path{
+    fill: #b3b300;
+}

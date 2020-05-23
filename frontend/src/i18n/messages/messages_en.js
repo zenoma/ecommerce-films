@@ -43,6 +43,7 @@ export default {
     'project.global.fields.goHome' : 'Go home',
     
     'project.movies.title': 'LISTING MOVIES',
+    'project.movies.favorite': 'Bookmark',
     'project.movies.CitySelector.selectCities': 'Select a city',
     'project.movies.CinemaSelector.selectCinemas': 'Select a cinema',
     'project.movies.DateSelector.selectDate': 'Select a date',

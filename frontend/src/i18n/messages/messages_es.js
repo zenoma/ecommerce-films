@@ -38,6 +38,7 @@ export default {
     'project.users.UpdateProfile.title': 'Actualizar perfil',
 
     'project.movies.title': 'CARTELERA',
+    'project.movies.favorite': 'Marcar favorito',
     'project.global.fields.movieTitle' : 'Título',
     'project.global.fields.movieSessions' : 'Sesiones',
     'project.global.fields.listingItemsEmpty' : 'No hay películas en la fecha seleccionada.',

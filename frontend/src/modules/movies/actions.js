@@ -34,7 +34,6 @@ const getCinemasCompleted = (cinemas) => ({
 });
 
 export const getCinemas = (city) => dispatch => {
-    dispatch(clearSelectedCinema());
     dispatch(clearMovies());
     backend.movieService.getCinemas(city, response => {
         dispatch(getCinemasCompleted(response))
@@ -52,10 +51,6 @@ export const getMovieSession = (id) => dispatch => {
         dispatch(getMovieSessionCompleted(response))
     });
 }
-
-const clearSelectedCinema = () =>({
-    type: actionTypes.CLEAR_SELECTED_CINEMA
-});
 
 const clearMovies = () =>({
     type: actionTypes.CLEAR_MOVIES
