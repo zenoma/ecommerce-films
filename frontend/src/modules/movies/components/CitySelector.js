@@ -5,11 +5,11 @@ import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 
-const CitySelector = (selectProps) => {
+const CitySelector = (props) => {
     const cities = useSelector(selectors.getCities);
-
+    
     return(
-        <select {...selectProps}>
+        <select {...props}>
             <FormattedMessage id='project.movies.CitySelector.selectCities'>
                 {message => (<option value={0} disabled>{message}</option>)}
             </FormattedMessage>
@@ -21,7 +21,7 @@ const CitySelector = (selectProps) => {
 }
 
 CitySelector.propTypes = {
-    selectProps: PropTypes.object
+    props: PropTypes.object
 };
 
 export default CitySelector;

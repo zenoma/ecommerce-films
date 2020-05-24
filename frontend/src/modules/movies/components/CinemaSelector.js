@@ -5,11 +5,11 @@ import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 
-const CinemaSelector = (selectProps) => {
+const CinemaSelector = (props) => {
     const cinemas = useSelector(selectors.getCinemas);
 
     return (
-        <select {...selectProps}>
+        <select {...props}>
             <FormattedMessage id='project.movies.CinemaSelector.selectCinemas'>
                 {message => (<option value={0} disabled>{message}</option>)}
             </FormattedMessage>
@@ -21,7 +21,7 @@ const CinemaSelector = (selectProps) => {
 }
 
 CinemaSelector.propTypes = {
-    selectProps: PropTypes.object
+    props: PropTypes.object
 };
 
 export default CinemaSelector;

@@ -7,7 +7,6 @@ const initialState = {
     listingDate: null,
     cities: null, 
     cinemas: null,
-    selectedCinema: null,
     movie : null,
     movieSession: null
 };
@@ -27,17 +26,6 @@ const listingDate = (state = initialState.listingDate, action) => {
     switch(action.type) {
         case actionTypes.GET_LISTING_COMPLETED:
             return action.date;
-        default:
-            return state;
-    }
-}
-
-const selectedCinema = (state = initialState.selectedCinema, action) => {
-    switch(action.type) {
-        case actionTypes.GET_LISTING_COMPLETED:
-            return action.selectedCinema;
-        case actionTypes.CLEAR_SELECTED_CINEMA:
-            return initialState.selectedCinema;
         default:
             return state;
     }
@@ -87,7 +75,6 @@ const movieSession = (state = initialState.movieSession, action) => {
 const reducer = combineReducers({
     movies,
     listingDate,
-    selectedCinema,
     cities, 
     cinemas,
     movie,

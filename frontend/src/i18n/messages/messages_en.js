@@ -47,6 +47,7 @@ export default {
     'project.global.fields.totalPrice' : 'Price',
     'project.global.fields.sessionDate' : 'Session Date',
     'project.movies.title': 'LISTING MOVIES',
+    'project.movies.favorite': 'Bookmark',
     'project.movies.CitySelector.selectCities': 'Select a city',
     'project.movies.CinemaSelector.selectCinemas': 'Select a cinema',
     'project.movies.DateSelector.selectDate': 'Select a date',

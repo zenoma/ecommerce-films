@@ -40,6 +40,7 @@ export default {
 
 
     'project.movies.title': 'CARTELERA',
+    'project.movies.favorite': 'Marcar favorito',
     'project.global.fields.movieTitle' : 'Título',
     'project.global.fields.movieSessions' : 'Sesións',
     'project.global.fields.listingItemsEmpty' : 'Non hai películas na data selecionada.',
