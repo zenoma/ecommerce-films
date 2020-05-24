@@ -30,7 +30,6 @@ const BuyForm = (props) => {
             setBackendErrors(null);
             form.classList.add('was-validated');
         }
-
     }
 
     return (

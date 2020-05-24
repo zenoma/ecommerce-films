@@ -36,6 +36,7 @@ export default {
     'project.users.SignUp.fields.confirmPassword': 'Confirmar contrasinal',
     'project.users.SignUp.title': 'Rexistrarse',
     'project.users.UpdateProfile.title': 'Actualizar perfil',
+    'project.users.BookHistory.title': 'Histórico de compras',
 
 
     'project.movies.title': 'CARTELERA',
@@ -43,6 +44,10 @@ export default {
     'project.global.fields.movieSessions' : 'Sesións',
     'project.global.fields.listingItemsEmpty' : 'Non hai películas na data selecionada.',
     'project.global.fields.goHome' : 'Volver a inicio',
+    'project.global.buttons.deliver' : "Entregar",
+    'project.global.fields.purchaseSeats' : 'Asentos',
+    'project.global.fields.totalPrice' : 'Prezo',
+    'project.global.fields.sessionDate' : 'Data Sesión',
 
     'project.movies.CitySelector.selectCities': 'Seleciona unha cidade',
     'project.movies.CinemaSelector.selectCinemas': 'Seleciona un cine',
@@ -60,5 +65,8 @@ export default {
     'project.books.fields.creditCard': 'Tarxeta de crédito',
     'project.books.fields.seats': 'Asientos',
     'project.books.BuyForm.title': 'Comprar',
-    'project.books.fields.confirmationMessage' : 'Antes do comezo da película, presenta o teu código xunto a tarxeta de crédito para recoller as entradas'
+    'project.books.fields.confirmationMessage' : 'Antes do comezo da película, presenta o teu código xunto a tarxeta de crédito para recoller as entradas',
+    'project.books.DeliverTicket.title': 'Validar entrada',
+    'project.books.DeliverTicket.delivered': '¡Entrada entregada correctamente!',
+    'project.books.FindBookHistory.noBooks': 'Ningunha reserva atopada'
 }

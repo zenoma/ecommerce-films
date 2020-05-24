@@ -109,6 +109,7 @@ public class BookingController {
 	}
 
 	@PostMapping("/books/deliver")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deliverTicket(@Validated @RequestBody DeliverTicketDto deliverTicketDto)
 			throws InstanceNotFoundException, CodeAndCreditCardNotMatchException, BookAlreadyTakenException,
 			MovieSessionAlreadyStartedException {
@@ -118,13 +119,10 @@ public class BookingController {
 	}
 
 	@GetMapping("/books")
-	public BlockDto<BookDto> findBooks(@RequestAttribute Long userId, @RequestParam Long user,
-			@RequestParam(defaultValue = "0") int page) throws InstanceNotFoundException, PermissionException {
-		if (user != userId) {
-			throw new PermissionException();
-		}
+	public BlockDto<BookDto> findBooks(@RequestAttribute Long userId, @RequestParam(defaultValue = "0") int page)
+		 throws InstanceNotFoundException {
 
-		Block<Book> books = bookingService.getBookRecord(user, page, 10);
+		Block<Book> books = bookingService.getBookRecord(userId, page, 10);
 
 		return new BlockDto<BookDto>(toBookDtos(books.getItems()), books.getExistMoreItems());
 

@@ -4,6 +4,8 @@ import {useParams} from 'react-router-dom';
 import * as selectors from "../selectors";
 import * as actions from '../actions';
 
+import * as actionsBooks from '../../books/actions';
+
 import {BackLink} from '../../common';
 import BuyForm from '../../books/components/BuyForm';
 
@@ -21,6 +23,7 @@ const MovieSessionVIew = () =>{
         const movieSessionId = Number(id);
         if (!Number.isNaN(movieSessionId)) {
             dispatch(actions.getMovieSession(movieSessionId));
+            dispatch(actionsBooks.clearTicket());
         }
     }, [id, dispatch]);
 
