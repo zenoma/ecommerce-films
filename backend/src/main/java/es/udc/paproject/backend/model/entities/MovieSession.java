@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.Version;
 
 @Entity
+@BatchSize(size=10)
 public class MovieSession {
 	private Long id;
 	private Movie movie;
