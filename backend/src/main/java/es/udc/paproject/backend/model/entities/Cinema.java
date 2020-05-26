@@ -12,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
+@BatchSize(size=10)
 public class Cinema {
 	private Long id;
 	private String name;

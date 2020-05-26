@@ -45,11 +45,13 @@ const getMovieSessionCompleted = (movieSession) => ({
     movieSession
 });
 
-export const getMovieSession = (id) => dispatch => {
+export const getMovieSession = (id, onErrors) => dispatch => {
     dispatch(clearMovieSession());
-    backend.movieService.getMovieSession(id, response => {
-        dispatch(getMovieSessionCompleted(response))
-    });
+    backend.movieService.getMovieSession(id, 
+        response => {
+            dispatch(getMovieSessionCompleted(response));
+        },
+        onErrors);
 }
 
 const clearMovies = () =>({
@@ -62,9 +64,10 @@ const getMovieByIdCompleted = movie => ({
     movie
 })
 
-export const getMovieById = id => dispatch =>{
+export const getMovieById = (id, onErrors) => dispatch =>{
     backend.movieService.getMovieById(id,
-        movie => dispatch(getMovieByIdCompleted(movie)));
+        movie => dispatch(getMovieByIdCompleted(movie)),
+        onErrors);
 }
 const clearMovieSession = () =>({
     type: actionTypes.CLEAR_MOVIESESSION

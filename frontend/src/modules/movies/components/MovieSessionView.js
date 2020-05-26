@@ -1,40 +1,46 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {FormattedMessage} from 'react-intl';
 import {useParams} from 'react-router-dom';
 import * as selectors from "../selectors";
 import * as actions from '../actions';
 
 import * as actionsBooks from '../../books/actions';
-
-import {BackLink} from '../../common';
 import BuyForm from '../../books/components/BuyForm';
 
-import {FormattedMessage} from 'react-intl';
-
 import common from '../../common';
+import {BackLink} from '../../common';
+import {Errors} from '../../common';
+import users from '../../users';
 
 const MovieSessionVIew = () =>{
     const dispatch = useDispatch();
 
     const session = useSelector(selectors.getMovieSession);
     const {id} = useParams();
+    const [backendErrors, setBackendErrors] = useState(null);
+    const role = useSelector(users.selectors.getRole);
 
     useEffect(() => {
         const movieSessionId = Number(id);
         if (!Number.isNaN(movieSessionId)) {
-            dispatch(actions.getMovieSession(movieSessionId));
+            dispatch(actions.getMovieSession(movieSessionId,
+                errors => setBackendErrors(errors)));
             dispatch(actionsBooks.clearTicket());
         }
     }, [id, dispatch]);
 
     if (!session) {
-        return null;
+        return <div>
+            <BackLink/>
+            <Errors errors={backendErrors}
+            onClose={() => setBackendErrors(null)}/>
+        </div>;
     }
     
     return (
         <div className="container">
             <BackLink/>
-
             <h1 className="mb-5 text-center">{session.movieTitle}</h1>
             <div className="row">
                 <div className="col-12 col-md-3">
@@ -76,7 +82,7 @@ const MovieSessionVIew = () =>{
                     </div>
                 </div>
                 <div className="col-12 col-md-9">
-                    <BuyForm sessionId = {Number(id)}/>
+                    {role==="USER" && <BuyForm sessionId = {Number(id)}/>}
                 </div>
             </div>
         </div>
