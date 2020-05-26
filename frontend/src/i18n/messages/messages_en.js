@@ -59,6 +59,7 @@ export default {
     'project.movies.fields.room': 'Room',
     'project.movies.fields.capacity': 'Capacity',
     'project.movies.fields.synopsis': 'Synopsis',
+    'project.movies.FavoriteCinema.selected': 'Favorite cinema saved',
 
     'project.books.fields.id': 'Book code',
     'project.books.fields.creditCard': 'Credit card',

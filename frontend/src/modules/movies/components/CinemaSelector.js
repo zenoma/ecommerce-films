@@ -11,7 +11,7 @@ const CinemaSelector = (props) => {
     return (
         <select {...props}>
             <FormattedMessage id='project.movies.CinemaSelector.selectCinemas'>
-                {message => (<option value={0} disabled>{message}</option>)}
+                {message => (<option value={0} >{message}</option>)}
             </FormattedMessage>
             {cinemas && cinemas.map(cinema =>
                 <option key={cinema.id} value={cinema.id}>{cinema.name}</option>

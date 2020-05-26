@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import PropTypes from 'prop-types';
 import * as selectors from "../selectors";
 import * as actions from "../actions";
 import FavoriteCinema from "./FavoriteCinema";
@@ -11,7 +12,7 @@ import common from "../../common";
 
 import {FormattedMessage} from 'react-intl';
 
-const Listing = () =>{
+const Listing = (props) =>{
     const dispatch = useDispatch();
     const listingDate = useSelector(selectors.getListingDate);
     const listingItems = useSelector(selectors.getListing);
@@ -20,21 +21,25 @@ const Listing = () =>{
 
     const setCity = cityId => {
         setSelectedCity(Number(cityId));
-        setSelectedCinema(0);
+        setCinema(0)
         dispatch(actions.getCinemas(cityId));
     }
 
     const setCinema = cinemaId => {
         setSelectedCinema(Number(cinemaId));
-        dispatch(actions.getListing(cinemaId, listingDate));
+        if (Number(cinemaId) !== 0) {
+            dispatch(actions.getListing(cinemaId, listingDate));
+        }
     }
 
-    if(!selectedCity && localStorage.getItem('city') != null){
-        setCity(localStorage.getItem('city'));
+    if(!selectedCity && props.city){
+        setCity(props.city)
     }
-    if(!selectedCinema && localStorage.getItem('cinema') != null){
-        setCinema(localStorage.getItem('cinema'));
+
+    if(!selectedCinema && props.cinema){
+        setCinema(props.cinema)
     }
+
 
     return (
         <div className="container">
@@ -46,8 +51,8 @@ const Listing = () =>{
             <div className="row">
                 <div className="col-12 col-lg-3">
                     <FavoriteCinema
-                        cinema={selectedCinema}
-                        city={selectedCity}
+                        cinema={Number(selectedCinema)}
+                        city={Number(selectedCity)}
                     />
                     <FormattedMessage id='project.movies.CitySelector.selectCities'>
                         {message => (<label><strong>
@@ -84,5 +89,12 @@ const Listing = () =>{
         </div>
     );
 };
+
+
+Listing.propTypes = {
+    city: PropTypes.number,
+    cinema: PropTypes.number,
+};
+
 
 export default Listing;

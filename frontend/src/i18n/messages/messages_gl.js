@@ -61,6 +61,7 @@ export default {
     'project.movies.fields.room': 'Sala',
     'project.movies.fields.capacity': 'Capacidade',
     'project.movies.fields.synopsis': 'Resumo',
+    'project.movies.FavoriteCinema.selected': 'Cine favorito gardado',
 
     'project.books.fields.id': 'Código de reserva',
     'project.books.fields.creditCard': 'Tarxeta de crédito',
