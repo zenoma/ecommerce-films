@@ -1,64 +1,92 @@
 import React from 'react';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import {render, fireEvent} from '@testing-library/react';
-import {createMemoryHistory} from 'history'
-
 import BuyForm from '../components/BuyForm';
-import {IntlProvider} from 'react-intl';
-import messages from '../../../i18n/messages';
-import {Router} from 'react-router-dom';
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
+import PurchaseCompleted from '../components/PurchaseCompleted';
+import {render, fireEvent} from '@testing-library/react';
 import * as actions from '../actions';
+import { IntlProvider } from 'react-intl';
+import messages from '../../../i18n/messages';
+
 
 const renderComponent = (component, initialState={})=> {
 
     const store = createStore(() => initialState);
     store.dispatch = jest.fn();
-    const history = createMemoryHistory();
 
     return {history, ...render(
         <Provider store={store}>
             <IntlProvider locale="en" messages={messages['en']}>
-                <Router history={history}>
                     {component}
-                </Router>
             </IntlProvider>
         </Provider>
     )};
 }
 
-afterEach(() => actions.buyTickets.mockRestore());
 
 test('buy - success', () => {
-
-    const bookId = 1;
-    const movieSessionId=1;
-    const initialState = {book: {ticket: bookId}};
+    const bookId = 0;
+    const movieSessionId=2;
+    const initialState = {books: {ticket: bookId}};
     const buySpy = jest.spyOn(actions, 'buyTickets').mockImplementation(
-        (_bookId, _tickets, _creditcard, _movieSessionId, onSuccess, _onErrors) => 
+        (_tickets, _creditcard, _movieSessionId, onSuccess, _onErrors) => 
             onSuccess());
 
-    const {getByLabelText, getByRole, history} = renderComponent(<BuyForm/>,
+    const {getByLabelText, getByRole} = renderComponent(
+        <BuyForm sessionId = {movieSessionId}>
+            <PurchaseCompleted ticket = {bookId}/>
+        </BuyForm>,
         initialState);
     const ticketsInput = getByLabelText("Seats")
-    const creditCardInput = getByLabelText('Credit Card');
+    const creditCardInput = getByLabelText('Credit card');
     const buyButton = getByRole('button');
-    const seats = 1;
+    const seats = 5;
     const creditcard = "1234567890123456"; 
 
     fireEvent.change(ticketsInput, {target: {value: seats}});
     fireEvent.change(creditCardInput, {target: {value: creditcard}});
 
-    expect(ticketsInput.value).toEqual(seats);
+    expect(Number(ticketsInput.value)).toEqual(seats);
     expect(creditCardInput.value).toEqual(creditcard);
 
     fireEvent.click(buyButton);
-
-    expect(buySpy.mock.calls[0][0]).toEqual(bookId);
-    expect(buySpy.mock.calls[0][1]).toEqual(seats);
-    expect(buySpy.mock.calls[0][2]).toEqual(creditcard);
+    
+    expect(Number(buySpy.mock.calls[0][0])).toEqual(seats);
+    expect(buySpy.mock.calls[0][1]).toEqual(creditcard);
     expect(buySpy.mock.calls[0][2]).toEqual(movieSessionId);
-    expect(history.length).toEqual(2);
-    expect(history.location.pathname).toEqual('/books/purchase-completed');
+});
 
+
+
+test('buy - error', () => {
+    const bookId = 1;
+    const movieSessionId=1;
+    const initialState = {books: {ticket: 0}};
+    const backendError = "Some backend error";
+
+    jest.spyOn(actions, 'buyTickets').mockImplementation(
+        (_tickets, _creditcard, _movieSessionId, _onSuccess, onErrors) => 
+            onErrors({globalError: backendError}));
+
+    const {getByLabelText, getByRole, container} = renderComponent(
+        <BuyForm sessionId = {movieSessionId}>
+            <PurchaseCompleted ticket = {bookId}/>
+        </BuyForm>,
+        initialState);
+    
+    const ticketsInput = getByLabelText("Seats")
+    const creditCardInput = getByLabelText('Credit card');
+    const buyButton = getByRole('button');
+    const seats = 5;
+    const creditcard = "1234567890123456"; 
+
+    fireEvent.change(ticketsInput, {target: {value: seats}});
+    fireEvent.change(creditCardInput, {target: {value: creditcard}});
+    
+    expect(Number(ticketsInput.value)).toEqual(seats);
+    expect(creditCardInput.value).toEqual(creditcard);
+    fireEvent.click(buyButton);
+
+    expect(container).toHaveTextContent(backendError);
+    
 });

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
-import users from '../../users';
 import books from '../';
 import PurchaseCompleted from './PurchaseCompleted';
 
@@ -15,7 +14,6 @@ const BuyForm = (props) => {
     const [seats, setSeats] = useState('');
     const [creditCard, setCreditCard] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
-    const loggedIn = useSelector(users.selectors.isLoggedIn);
     const ticket = useSelector(books.selectors.getTicket);
     let form;
 
@@ -34,7 +32,7 @@ const BuyForm = (props) => {
 
     return (
         <div>
-         {loggedIn && !ticket &&
+         {!ticket &&
             <div>
                 <Errors errors={backendErrors}
                     onClose={() => setBackendErrors(null)}/>
@@ -88,10 +86,9 @@ const BuyForm = (props) => {
                 </div>
             </div>
         }
-        {
-            loggedIn && ticket &&
+        {/* {ticket &&
             <PurchaseCompleted ticket={{'id':ticket, seats, creditCard}}/>
-        }
+        } */}
         </div>
     );
 
