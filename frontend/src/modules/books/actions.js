@@ -10,7 +10,7 @@ export const buyTickets = (seats, creditCard, sessionId, onSuccess,
     },
     onErrors);
 
-const buyTicketCompleted = (ticket) => ({
+export const buyTicketCompleted = (ticket) => ({
     type: actionTypes.BUY_TICKET_COMPLETED,
     ticket
 });
