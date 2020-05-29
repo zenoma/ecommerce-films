@@ -86,9 +86,9 @@ const BuyForm = (props) => {
                 </div>
             </div>
         }
-        {/* {ticket &&
+        {ticket &&
             <PurchaseCompleted ticket={{'id':ticket, seats, creditCard}}/>
-        } */}
+        }
         </div>
     );
 

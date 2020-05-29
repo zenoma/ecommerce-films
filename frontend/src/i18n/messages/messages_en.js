@@ -24,6 +24,7 @@ export default {
     'project.global.fields.postalAddress': 'Postal address',
     'project.global.fields.postalCode': 'Postal code',
     'project.global.fields.userName': 'Username',
+    'project.global.fields.creditcard': 'Credit card',
     'project.global.validator.email': 'Provide a correct e-mail address',
     'project.global.validator.passwordsDoNotMatch': 'Passwords do not match',
     'project.global.validator.required': 'Required field',

@@ -39,7 +39,7 @@ const Books = ({books}) => (
                         {book.tickets}
                     </td>
                     <td>
-                        {book.price}
+                        {book.price.toFixed(2)}
                     </td>
                     <td>
                     <FormattedDate value={new Date(book.dateMovieSession)}/> - <FormattedTime value={new Date(book.dateMovieSession)}/>
