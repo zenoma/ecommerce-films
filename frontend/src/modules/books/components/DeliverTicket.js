@@ -19,6 +19,20 @@ const DeliverTicket = () =>{
 
     let form;
 
+    const autoCloseAlert=()=>{
+        setTimeout(() => {
+            if(backendErrors){
+                setBackendErrors(null);
+            }
+          }, 5000);
+    }
+
+    const onSuccessAlert=()=>{
+        setTimeout(() => {
+            setTicketDelivered(false);
+          }, 5000);
+    }
+
     const handleSubmit = event => {
        
         event.preventDefault();
@@ -28,6 +42,7 @@ const DeliverTicket = () =>{
                     setTicketDelivered(true);
                     setBookId('');
                     setCreditCard('');
+                    setBackendErrors(null);
                 },
                 errors => setBackendErrors(errors)));
         } else {
@@ -39,7 +54,7 @@ const DeliverTicket = () =>{
     return (
         <div>
             {ticketDelivered &&
-                <Success message='project.books.DeliverTicket.delivered' />
+                <Success message='project.books.DeliverTicket.delivered' onLoad={onSuccessAlert()}/>
             }
             <BackLink/>
             <h1 className="mb-5 text-center">
@@ -47,7 +62,7 @@ const DeliverTicket = () =>{
                     {message => (<strong>{message}</strong>)}
                 </FormattedMessage>
             </h1>
-            <Errors errors={backendErrors}
+            <Errors errors={backendErrors} onLoad={autoCloseAlert()}
                     onClose={() => setBackendErrors(null)}/>
             <form ref={node => form = node}
                 className="needs-validation" noValidate 
